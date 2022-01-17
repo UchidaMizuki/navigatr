@@ -4,43 +4,63 @@ activate <- function(.data, ..., .add = FALSE) {
 }
 
 #' @export
-activate.default <- function(.data, ..., .add = FALSE) {
+activate.menu <- function(.data, ..., .add = FALSE) {
   vars <- enquos(...)
 
-  key <- tidyselect::vars_pull(.data$key, !!vars[[1]])
-  vars <- vars[-1]
-
-  out <- new_activated(.x, key)
-
   if (!is_empty(vars)) {
-    out <- activate(out, !!!vars)
+    key <- .data$key
+    loc <- tidyselect::vars_pull(key, !!vars[[1]])
+    loc <- which(key == loc)
+    vars <- vars[-1]
+
+    .data <- new_item(.data, loc)
+
+    if (!is_empty(vars)) {
+      .data <- activate(.data, !!!vars,
+                        .add = TRUE)
+    }
   }
-  out
+  .data
 }
 
-#' #' @export
-#' deactivate <- function(x, ..., deep = TRUE) {
-#'   UseMethod("deactivate")
-#' }
-#'
-#' #' @export
-#' deactivate.default <- function(x, ..., deep = TRUE) {
-#'   x
-#' }
-#'
-#' #' @export
-#' deactivate.activated <- function(x, ..., deep = TRUE) {
-#'   key <- attr(x, "key")
-#'   parent <- attr(x, "parent")
-#'
-#'   attr(x, "key") <- NULL
-#'   attr(x, "parent") <- NULL
-#'   class(x) <- class(purrr::chuck(parent, key))
-#'
-#'   parent[[key]] <- x
-#'
-#'   if (deep) {
-#'     parent <- deactivate(parent)
-#'   }
-#'   parent
-#' }
+#' @export
+activate.item <- function(.data, ..., .add = FALSE) {
+  if (!.add) {
+    .data <- deactivate(.data)
+  }
+  activate.menu(.data, ...)
+}
+
+#' @export
+deactivate <- function(x, ..., deep = TRUE) {
+  UseMethod("deactivate")
+}
+
+#' @export
+deactivate.default <- function(x, ..., deep = TRUE) {
+  x
+}
+
+#' @export
+deactivate.item <- function(x, ..., deep = TRUE) {
+  parent <- item_parent(x)
+  path <- item_path(x)
+  attrs <- item_attrs(x)
+
+  loc <- last(path)
+
+  attr(x, "item") <- NULL
+  x <- remove_item_class(x)
+
+  first(vec_slice(parent, loc)$value) <- x
+
+  nms <- names(attrs)
+  for (nm in nms) {
+    first(vec_slice(parent, loc)$attrs[[nm]]) <- attrs[[nm]]
+  }
+
+  if (deep) {
+    parent <- deactivate(parent)
+  }
+  parent
+}
