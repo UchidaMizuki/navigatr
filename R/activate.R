@@ -51,7 +51,9 @@ deactivate.item <- function(x, ..., deep = TRUE) {
     first(vec_slice(parent, loc)$attrs[[attr_name]]) <- attr(x, attr_name)
   }
 
-  x <- remove_item_attrs(x)
+  attrs <- attributes(x)
+  attributes(x) <- attrs[setdiff(names(attrs), attr_names)]
+
   x <- unitem(x)
   first(vec_slice(parent, loc)$value) <- x
 

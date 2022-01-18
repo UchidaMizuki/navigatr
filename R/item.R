@@ -17,6 +17,12 @@ is_item <- function(x) {
   inherits(x, "item")
 }
 
+unitem <- function(x) {
+  attr(x, "item") <- NULL
+  class(x) <- setdiff(class(x), "item")
+  x
+}
+
 #' @export
 format.item <- function(x, ...) {
   subtle_comment(format_menu(deactivate(x), item_path(x)))
