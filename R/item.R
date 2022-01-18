@@ -12,15 +12,15 @@ new_item <- function(parent, loc) {
        class = c("item", class(out)))
 }
 
-#' @export
-is_item <- function(x) {
-  inherits(x, "item")
-}
-
 unitem <- function(x) {
   attr(x, "item") <- NULL
   class(x) <- setdiff(class(x), "item")
   x
+}
+
+#' @export
+is_item <- function(x) {
+  inherits(x, "item")
 }
 
 #' @export
