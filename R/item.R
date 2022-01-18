@@ -1,15 +1,15 @@
 #' @export
 new_item <- function(parent, loc) {
-  sliced <- vec_slice(parent, loc)
+  child <- vec_slice(parent, loc)
 
-  out <- first(sliced$value)
+  out <- first(child$value)
+  attrs <- purrr::modify(as.list(child$attrs), first)
   item <- list(parent = parent,
                path = c(item_path(parent), loc),
-               attrs = purrr::modify(as.list(sliced$attrs), first))
-
-  structure(out,
-            item = item,
-            class = c("item", class(out)))
+               attr_names = names2(attrs))
+  exec(structure, out, !!!attrs,
+       item = item,
+       class = c("item", class(out)))
 }
 
 #' @export
@@ -28,22 +28,19 @@ print.item <- function(x, ...) {
 
   if (!is_menu(x)) {
     writeLines(subtle_comment())
-    print(remove_item_class(x))
+    print(unitem(x))
   }
   invisible(x)
 }
 
-#' @export
 item_parent <- function(x) {
-  attr(x, "item")$parent %||% new_tbl_menu()
+  attr(x, "item")$parent %||% new_menu()
 }
 
-#' @export
 item_path <- function(x) {
   attr(x, "item")$path %||% integer()
 }
 
-#' @export
-item_attrs <- function(x) {
-  attr(x, "item")$attrs
+item_attr_names <- function(x) {
+  attr(x, "item")$attr_names %||% character()
 }
