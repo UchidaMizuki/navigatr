@@ -31,7 +31,7 @@ tbl_sum.menu <- function(x) {
 
 #' @export
 format.menu <- function(x, ...) {
-  subtle_comment(format_menu(x))
+  subtle_comment(c(format_menu(x), ""))
 }
 
 format_menu <- function(x, path = integer()) {
@@ -63,5 +63,10 @@ format_menu <- function(x, path = integer()) {
 #' @export
 print.menu <- function(x, ...) {
   writeLines(format(x))
+  print_menu()
   invisible(x)
+}
+
+print_menu <- function() {
+  writeLines(subtle_comment("Please activate the item."))
 }

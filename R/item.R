@@ -25,7 +25,7 @@ unitem <- function(x) {
 
 #' @export
 format.item <- function(x, ...) {
-  subtle_comment(format_menu(deactivate(x), item_path(x)))
+  subtle_comment(c(format_menu(deactivate(x), item_path(x)), ""))
 }
 
 #' @export
@@ -33,8 +33,9 @@ print.item <- function(x, ...) {
   writeLines(format(x))
 
   if (!is_menu(x)) {
-    writeLines(subtle_comment())
     print(unitem(x))
+  } else {
+    print_menu()
   }
   invisible(x)
 }
