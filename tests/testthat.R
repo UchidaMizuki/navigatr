@@ -1,4 +1,4 @@
 library(testthat)
-library(menur)
+library(navigatr)
 
-test_check("menur")
+test_check("navigatr")

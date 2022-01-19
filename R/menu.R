@@ -1,12 +1,13 @@
 #' @export
 new_menu <- function(key = character(),
                      value = list(),
-                     attrs = NULL, ...,
+                     attrs = data_frame(.size = 1), ...,
                      class = character()) {
-  vec_assert(key, character())
-  vec_assert(value, list())
+  key <- vec_cast(key, character())
+  value <- vec_cast(value, list())
   stopifnot(
-    is.null(attrs) || is.data.frame(attrs)
+    !vec_duplicate_any(key),
+    is.data.frame(attrs)
   )
 
   new_data_frame(df_list(key = key,
@@ -79,5 +80,5 @@ print.menu <- function(x, ...) {
 }
 
 print_menu <- function() {
-  writeLines(subtle_comment("Please activate the item."))
+  writeLines(subtle_comment("Activate the item with `navigatr::activate()`."))
 }

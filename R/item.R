@@ -1,5 +1,4 @@
-#' @export
-new_item <- function(parent, loc) {
+item <- function(parent, loc) {
   child <- vec_slice(parent, loc)
 
   out <- child$value[[1]]
