@@ -2,8 +2,11 @@
 new_item <- function(parent, loc) {
   child <- vec_slice(parent, loc)
 
-  out <- first(child$value)
-  attrs <- purrr::modify(as.list(child$attrs), first)
+  out <- child$value[[1]]
+  attrs <- purrr::modify(as.list(child$attrs),
+                         function(x) {
+                           x[[1]]
+                         })
   item <- list(parent = parent,
                path = c(item_path(parent), loc),
                attr_names = names2(attrs))

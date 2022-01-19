@@ -3,6 +3,12 @@ new_menu <- function(key = character(),
                      value = list(),
                      attrs = NULL, ...,
                      class = character()) {
+  vec_assert(key, character())
+  vec_assert(value, list())
+  stopifnot(
+    is.null(attrs) || is.data.frame(attrs)
+  )
+
   new_data_frame(df_list(key = key,
                          value = value,
                          attrs = attrs), ...,
@@ -37,18 +43,23 @@ format.menu <- function(x, ...) {
 format_menu <- function(x, path = integer()) {
   out <- tbl_sum(x)
 
-  loc <- first(path)
-  checkbox <- ifelse(vec_equal(vec_seq_along(x), loc,
-                               na_equal = TRUE),
-                     cli::symbol$checkbox_on,
-                     cli::symbol$checkbox_off)
+  if (is_empty(path)) {
+    loc <- NULL
+    checkbox <- cli::symbol$checkbox_off
+  } else {
+    loc <- path[[1]]
+    checkbox <- ifelse(vec_equal(vec_seq_along(x), loc,
+                                 na_equal = TRUE),
+                       cli::symbol$checkbox_on,
+                       cli::symbol$checkbox_off)
+  }
 
   out <- paste0(checkbox, " ",
                 pillar::align(paste0(names(out), ": ")),
                 out)
 
-  path <- tail(path)
-  if (!is.na(loc)) {
+  if (!is.null(loc)) {
+    path <- path[-1]
     child <- activate(x, loc,
                       .add = TRUE)
 

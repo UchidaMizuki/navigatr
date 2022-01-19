@@ -9,10 +9,10 @@ activate.menu <- function(.data, ..., .add = FALSE) {
 
   if (!is_empty(vars)) {
     key <- .data$key
-    loc <- which(key == tidyselect::vars_pull(key, !!first(vars)))
+    loc <- which(key == tidyselect::vars_pull(key, !!vars[[1]]))
     .data <- new_item(.data, loc)
 
-    vars <- tail(vars)
+    vars <- vars[-1]
     if (!is_empty(vars)) {
       .data <- activate(.data, !!!vars,
                         .add = TRUE)
@@ -45,17 +45,15 @@ deactivate.item <- function(x, ..., deep = TRUE) {
   path <- item_path(x)
   attr_names <- item_attr_names(x)
 
-  loc <- last(path)
+  loc <- path[[length(path)]]
 
   for (attr_name in attr_names) {
-    first(vec_slice(parent, loc)$attrs[[attr_name]]) <- attr(x, attr_name)
+    vec_slice(parent, loc)$attrs[[attr_name]][[1]] <- attr(x, attr_name)
+    attr(x, attr_name) <- NULL
   }
 
-  attrs <- attributes(x)
-  attributes(x) <- attrs[setdiff(names(attrs), attr_names)]
-
   x <- unitem(x)
-  first(vec_slice(parent, loc)$value) <- x
+  vec_slice(parent, loc)$value[[1]] <- x
 
   if (deep) {
     parent <- deactivate(parent)
