@@ -3,8 +3,8 @@ new_menu <- function(key = character(),
                      value = list(),
                      attrs = data_frame(.size = 1), ...,
                      class = character()) {
-  key <- vec_cast(key, character())
-  value <- vec_cast(value, list())
+  key <- as.character(key)
+  value <- as.list(value)
   stopifnot(
     !vec_duplicate_any(key),
     is.data.frame(attrs)
@@ -80,5 +80,5 @@ print.menu <- function(x, ...) {
 }
 
 print_menu <- function() {
-  writeLines(subtle_comment("Activate the item with `navigatr::activate()`."))
+  writeLines(subtle_comment("Please `activate()` the item."))
 }
