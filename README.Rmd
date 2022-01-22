@@ -22,8 +22,8 @@ navigatr provides a navigation menu that allows easy data processing for each it
 Only two functions, `new_menu()` and `activate()`, are the core functions of this package.
 Their roles are as follows,
 
-- `new_menu()` builds a new navigation menu that can use `activate()` (for developers).
-- `activate()` makes it easy to perform hierarchical data processing (for users).
+- `new_menu()` builds a new navigation menu that users can use with `activate()` (for developers)
+- `activate()` makes it easy to perform hierarchical data processing (for users)
 
 ## Installation
 
