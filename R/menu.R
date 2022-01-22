@@ -118,5 +118,5 @@ print.menu <- function(x, ...) {
 }
 
 print_menu <- function() {
-  writeLines(subtle_comment("Please `activate()` the item."))
+  writeLines(subtle_comment("Please `activate()` an item."))
 }

@@ -6,10 +6,9 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-navigatr provides a navigation menu that allows easy data processing for
-each item. Only two functions, `new_menu()` and `activate()`, are the
-core functions of this package. The roles of these functions are as
-follows,
+navigatr provides a new navigation menu that allows easy data processing
+for each item. Only two functions, `new_menu()` and `activate()`, are
+the core functions of this package. Their roles are as follows,
 
 -   `new_menu()` builds a navigation menu that can use `activate()` (for
     developers).
@@ -31,7 +30,7 @@ You can also install the development version from GitHub.
 devtools::install_github("UchidaMizuki/navigatr")
 ```
 
-## Example
+## Examples
 
 ``` r
 library(navigatr)
@@ -50,7 +49,7 @@ mn1
 #> # [ ] band_members:     tibble [3 x 2]
 #> # [ ] band_instruments: tibble [3 x 2]
 #> # 
-#> # Please `activate()` the item.
+#> # Please `activate()` an item.
 ```
 
 You can activate a menu item by `activate()`. Activating a menu item
@@ -78,7 +77,7 @@ mn1_1 %>%
 #> # [ ] band_members:     tibble [2 x 2]
 #> # [ ] band_instruments: tibble [3 x 2]
 #> # 
-#> # Please `activate()` the item.
+#> # Please `activate()` an item.
 ```
 
 You can also build a nested menu. To activate items in a nested menu,

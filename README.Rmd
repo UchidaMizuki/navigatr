@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-navigatr provides a navigation menu that allows easy data processing for each item.
+navigatr provides a new navigation menu that allows easy data processing for each item.
 Only two functions, `new_menu()` and `activate()`, are the core functions of this package.
-The roles of these functions are as follows,
+Their roles are as follows,
 
 - `new_menu()` builds a navigation menu that can use `activate()` (for developers).
 - `activate()` makes it easy to perform hierarchical data processing (for users).
@@ -40,7 +40,7 @@ You can also install the development version from GitHub.
 devtools::install_github("UchidaMizuki/navigatr")
 ```
 
-## Example
+## Examples
 
 ```{r,message=FALSE}
 library(navigatr)
