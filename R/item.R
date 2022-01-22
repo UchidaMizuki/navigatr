@@ -1,17 +1,7 @@
-item <- function(parent, loc) {
-  child <- vec_slice(parent, loc)
-
-  out <- child$value[[1]]
-  attrs <- purrr::modify(as.list(child$attrs),
-                         function(x) {
-                           x[[1]]
-                         })
-  item <- list(parent = parent,
-               path = c(item_path(parent), loc),
-               attr_names = names2(attrs))
-  exec(structure, out, !!!attrs,
-       item = item,
-       class = c("item", class(out)))
+item <- function(x, attrs, attr_item) {
+  exec(structure, x, !!!attrs,
+       item = attr_item,
+       class = c("item", class(x)))
 }
 
 unitem <- function(x) {
@@ -20,6 +10,10 @@ unitem <- function(x) {
   x
 }
 
+#' Test if an object is an item
+#'
+#' @param x An object.
+#'
 #' @export
 is_item <- function(x) {
   inherits(x, "item")
@@ -34,10 +28,16 @@ format.item <- function(x, ...) {
 print.item <- function(x, ...) {
   writeLines(format(x))
 
-  if (!is_menu(x)) {
-    print(unitem(x))
-  } else {
+  if (is_menu(x)) {
     print_menu()
+  } else {
+    out <- unitem(x)
+
+    # For tibble printing problems
+    if (!tibble::has_rownames(out)) {
+      out <- tibble::remove_rownames(out)
+    }
+    print(out)
   }
   invisible(x)
 }

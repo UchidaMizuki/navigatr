@@ -1,0 +1,80 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# navigatr
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+navigatr provides a navigation menu that allows easy data processing for each item.
+
+## Installation
+
+You can install navigatr from CRAN.
+
+``` r
+install.packages("navigatr")
+```
+
+You can also install the development version from GitHub.
+
+``` r
+# install.packages("devtools")
+devtools::install_github("UchidaMizuki/navigatr")
+```
+
+## Example
+
+```{r,message=FALSE}
+library(navigatr)
+library(dplyr)
+```
+
+To build a new menu, give `new_menu()` unique keys and a list of their corresponding values.
+The top row shows the menu items (keys on the left, value summaries on the right).
+The summaries are `pillar::obj_sum` outputs, so you can change the printing methods.
+
+```{r}
+mn1 <- new_menu(key = c("band_members", "band_instruments"),
+                value = list(band_members, band_instruments))
+mn1
+```
+
+You can activate a menu item by `activate()`.
+Activating a menu item allows you to perform operations on the active item.
+`activate()` turns a `menu` object into an `item` object, and `deactivate()` turns it back.
+
+```{r}
+mn1_1 <- mn1 %>%
+  activate(band_members) %>%
+  filter(band == "Beatles")
+mn1_1
+```
+
+```{r}
+mn1_1 %>% 
+  deactivate()
+```
+
+You can also build a nested menu.
+To activate items in a nested menu, specify multiple variables.
+
+```{r}
+mn2 <- new_menu(key = c("key1", "key2"),
+                value = list(mn1, mn1))
+mn2 %>% 
+  activate(key1, band_instruments) %>% 
+  select(name)
+```
