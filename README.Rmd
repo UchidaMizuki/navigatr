@@ -19,6 +19,11 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 navigatr provides a navigation menu that allows easy data processing for each item.
+Only two functions, `new_menu()` and `activate()`, are the core functions of this package.
+The roles of these functions are as follows,
+
+- `new_menu()` builds a navigation menu that can use `activate()` (for developers).
+- `activate()` makes it easy to perform hierarchical data processing (for users).
 
 ## Installation
 
@@ -43,8 +48,8 @@ library(dplyr)
 ```
 
 To build a new menu, give `new_menu()` unique keys and a list of their corresponding values.
-The top row shows the menu items (keys on the left, value summaries on the right).
-The summaries are `pillar::obj_sum` outputs, so you can change the printing methods.
+The upper rows show the menu items (keys on the left, value summaries on the right).
+By defining `pillar::obj_sum`, you can change the way the summaries are displayed.
 
 ```{r}
 mn1 <- new_menu(key = c("band_members", "band_instruments"),
