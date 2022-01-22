@@ -6,12 +6,12 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-navigatr provides a new navigation menu that allows easy data processing
-for each item. Only two functions, `new_menu()` and `activate()`, are
-the core functions of this package. Their roles are as follows,
+navigatr provides a navigation menu that allows easy data processing for
+each item. Only two functions, `new_menu()` and `activate()`, are the
+core functions of this package. Their roles are as follows,
 
--   `new_menu()` builds a navigation menu that can use `activate()` (for
-    developers).
+-   `new_menu()` builds a new navigation menu that can use `activate()`
+    (for developers).
 -   `activate()` makes it easy to perform hierarchical data processing
     (for users).
 
@@ -37,10 +37,10 @@ library(navigatr)
 library(dplyr)
 ```
 
-To build a new menu, give `new_menu()` unique keys and a list of their
-corresponding values. The upper rows show the menu items (keys on the
-left, value summaries on the right). By defining `pillar::obj_sum`, you
-can change the way the summaries are displayed.
+To build a new navigation menu, give `new_menu()` unique keys and a list
+of their corresponding values. The upper rows show the menu items (keys
+on the left, value summaries on the right). By defining
+`pillar::obj_sum`, you can change the way the summaries are displayed.
 
 ``` r
 mn1 <- new_menu(key = c("band_members", "band_instruments"),

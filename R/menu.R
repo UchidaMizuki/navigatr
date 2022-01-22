@@ -1,6 +1,6 @@
 #' Build a new navigation menu
 #'
-#' To build a new menu, give `new_menu()` unique keys and a list of their corresponding values.
+#' To build a new navigation menu, give `new_menu()` unique keys and a list of their corresponding values.
 #' The top row shows the menu items (keys on the left, value summaries on the right).
 #' The summaries are [pillar::obj_sum] outputs, so you can change the printing methods.
 #' Each menu item can be accessed by [activate()].
