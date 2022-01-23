@@ -9,6 +9,9 @@ is_item(x)
 \arguments{
 \item{x}{An object.}
 }
+\value{
+\code{TRUE} if the object inherits from the \code{item} class.
+}
 \description{
 Test if an object is an item
 }

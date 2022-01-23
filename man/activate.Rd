@@ -35,9 +35,10 @@ If \code{FALSE} (default value), the menu will be deactivated first by \code{\li
 \item{deep}{If \code{TRUE} (default value), deactivate recursively.}
 }
 \value{
-An \code{item} object.
+In \code{activate()}, An \code{item} object.
 If it inherits from class \code{menu}, the menu will be displayed hierarchically.
 Otherwise, the active data will be displayed.
+In \code{deactivate()}, A \code{menu} object.
 }
 \description{
 Activates a menu item with the same syntax as \code{\link[dplyr:pull]{dplyr::pull()}}.
@@ -46,7 +47,6 @@ Activating a menu item allows you to perform operations on the active item.
 and \code{deactivate()} turns it back.
 }
 \examples{
-library(tibble)
 library(dplyr)
 
 mn1 <- new_menu(key = c("band_members", "band_instruments"),

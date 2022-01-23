@@ -30,8 +30,9 @@ When an item becomes active, the attrs will be added to its attributes.}
 A \code{menu} object, a subclass of class \code{data.frame}.
 }
 \description{
-\code{new_menu()} build a new navigation menu.
-The menu has unique keys and their corresponding values.
+To build a new navigation menu, give \code{new_menu()} unique keys and a list of their corresponding values.
+The top row shows the menu items (keys on the left, value summaries on the right).
+The summaries are \link[pillar:type_sum]{pillar::obj_sum} outputs, so you can change the printing methods.
 Each menu item can be accessed by \code{\link[=activate]{activate()}}.
 }
 \examples{

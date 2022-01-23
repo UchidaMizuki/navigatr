@@ -19,7 +19,6 @@
 #' In `deactivate()`, A `menu` object.
 #'
 #' @examples
-#' library(tibble)
 #' library(dplyr)
 #'
 #' mn1 <- new_menu(key = c("band_members", "band_instruments"),
