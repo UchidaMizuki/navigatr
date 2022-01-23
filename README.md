@@ -80,12 +80,12 @@ mn1_1 %>%
 #> # Please `activate()` an item.
 ```
 
-You can also build a nested menu. To activate items in a nested menu,
+You can also build a nested navigation menu. To activate the items,
 specify multiple variables.
 
 ``` r
 mn2 <- new_menu(key = c("key1", "key2"),
-                value = list(mn1, mn1))
+                value = list(mn1, mn1)) # A list of menu objects
 mn2 %>% 
   activate(key1, band_instruments) %>% 
   select(name)
