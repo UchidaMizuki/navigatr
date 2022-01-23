@@ -14,6 +14,8 @@ unitem <- function(x) {
 #'
 #' @param x An object.
 #'
+#' @return `TRUE` if the object inherits from the `item` class.
+#'
 #' @export
 is_item <- function(x) {
   inherits(x, "item")
