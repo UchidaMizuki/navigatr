@@ -13,9 +13,10 @@
 #' @param x A `menu` object.
 #' @param deep If `TRUE` (default value), deactivate recursively.
 #'
-#' @return An `item` object.
+#' @return In `activate()`, An `item` object.
 #' If it inherits from class `menu`, the menu will be displayed hierarchically.
 #' Otherwise, the active data will be displayed.
+#' In `deactivate()`, A `menu` object.
 #'
 #' @examples
 #' library(tibble)
