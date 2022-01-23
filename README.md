@@ -7,8 +7,8 @@
 <!-- badges: end -->
 
 navigatr provides a navigation menu that allows easy data processing for
-each item. Only two functions, `new_menu()` and `activate()`, are the
-core functions of this package. Their roles are as follows,
+each menu item. Only two functions, `new_menu()` and `activate()`, are
+the core functions of this package. Their roles are as follows,
 
 -   `new_menu()` builds a new navigation menu that users can use with
     `activate()` (for developers)
