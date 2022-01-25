@@ -6,9 +6,13 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-navigatr provides a navigation menu that allows easy data processing for
-each menu item. Only two functions, `new_menu()` and `activate()`, are
-the core functions of this package. Their roles are as follows,
+navigatr provides a navigation menu to enable pipe-friendly data
+processing for hierarchical data structures. By activating the menu
+items, you can perform operations on each item while maintaining the
+overall structure in attributes.
+
+Only two functions, `new_menu()` and `activate()`, are the core
+functions of this package. Their roles are as follows,
 
 -   `new_menu()` builds a new navigation menu that users can use with
     `activate()` (for developers)

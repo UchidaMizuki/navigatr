@@ -18,7 +18,9 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-navigatr provides a navigation menu that allows easy data processing for each menu item.
+navigatr provides a navigation menu to enable pipe-friendly data processing for hierarchical data structures.
+By activating the menu items, you can perform operations on each item while maintaining the overall structure in attributes.
+
 Only two functions, `new_menu()` and `activate()`, are the core functions of this package.
 Their roles are as follows,
 

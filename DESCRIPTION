@@ -1,10 +1,11 @@
 Package: navigatr
 Type: Package
-Title: Navigation Menu for Data Processing
+Title: Navigation Menu for Pipe-Friendly Data Processing
 Version: 0.1.0
 Authors@R: 
     person("Mizuki", "Uchida", , "uchidamizuki@vivaldi.net", role = c("aut", "cre"))
-Description: Provides a navigation menu that allows easy data processing for each item.
+Description: Provides a navigation menu to enable pipe-friendly data processing for hierarchical data structures.
+    By activating the menu items, you can perform operations on each item while maintaining the overall structure in attributes.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
