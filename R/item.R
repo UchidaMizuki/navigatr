@@ -36,7 +36,7 @@ print.item <- function(x, ...) {
     out <- unitem(x)
 
     # For tibble printing problems
-    if (!tibble::has_rownames(out)) {
+    if (tibble::is_tibble(out) && !tibble::has_rownames(out)) {
       out <- tibble::remove_rownames(out)
     }
     print(out)
