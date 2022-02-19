@@ -116,6 +116,10 @@ deactivate.navigatr_item <- function(x, ..., deep = TRUE) {
 
   loc <- path[[vec_size(path)]]
 
+  stopifnot(
+    !key %in% parent$key[-loc]
+  )
+
   parent$key[[loc]] <- key
   parent$value[[loc]] <- unitem(x)
 
