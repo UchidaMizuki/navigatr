@@ -1,3 +1,9 @@
+#' @importFrom dplyr select
+#' @export
+select.navigatr_item <- function(.data, ...) {
+  item_wrap(select)(.data, ...)
+}
+
 #' @importFrom dplyr group_by
 #' @export
 group_by.navigatr_item <- function(.data, ...) {
