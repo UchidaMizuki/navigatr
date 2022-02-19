@@ -115,7 +115,7 @@ deactivate.item <- function(x, ..., deep = TRUE) {
   loc <- path[[length(path)]]
 
   for (attr_name in attr_names) {
-    parent$attrs[[loc]] <- attr(x, attr_name)
+    parent$attrs[[attr_name]][[loc]] <- attr(x, attr_name)
     attr(x, attr_name) <- NULL
   }
 
