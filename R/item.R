@@ -21,18 +21,16 @@ is_item <- function(x) {
   inherits(x, "navigatr_item")
 }
 
+#' Rename a key
+#'
+#' @param data A `navigatr_item` object.
+#' @param new_key New key name.
+#'
+#' @return A `navigatr_item` object.
+#'
 #' @export
 rekey <- function(data, new_key) {
-  stopifnot(
-    is_scalar_character(new_key)
-  )
-
-  parent <- item_parent(data)
-  path <- item_path(data)
-
-  loc <- path[[vec_size(path)]]
-  parent$key[[loc]] <- new_key
-  item_parent(data) <- parent
+  item_key(data) <- new_key
   data
 }
 
@@ -67,13 +65,17 @@ navigatr_tree <- function(x) {
   x
 }
 
-item_parent <- function(x) {
-  navigatr_tree(x)$parent %||% new_menu()
+item_key <- function(x) {
+  navigatr_tree(x)$key %||% NA_character_
 }
 
-`item_parent<-` <- function(x, value) {
-  navigatr_tree(x)$parent <- value
+`item_key<-` <- function(x, value) {
+  navigatr_tree(x)$key <- value
   x
+}
+
+item_parent <- function(x) {
+  navigatr_tree(x)$parent %||% new_menu()
 }
 
 item_path <- function(x) {
