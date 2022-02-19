@@ -10,7 +10,7 @@ is_menu(x)
 \item{x}{An object.}
 }
 \value{
-\code{TRUE} if the object inherits from the \code{menu} class.
+\code{TRUE} if the object inherits from the \code{navigatr_menu} class.
 }
 \description{
 Test if the object is a menu

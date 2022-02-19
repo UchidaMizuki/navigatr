@@ -14,7 +14,7 @@
 #' @param ... Additional arguments passed to [vctrs::new_data_frame()].
 #' @param class A character vector of subclasses passed to [vctrs::new_data_frame()].
 #'
-#' @return A `menu` object, a subclass of class `data.frame`.
+#' @return A `navigatr_menu` object, a subclass of class `data.frame`.
 #'
 #' @seealso [activate()]
 #'
@@ -45,23 +45,23 @@ new_menu <- function(key = character(),
   new_data_frame(df_list(key = key,
                          value = value,
                          attrs = attrs), ...,
-                 class = c(class, "menu"))
+                 class = c(class, "navigatr_menu"))
 }
 
 #' Test if the object is a menu
 #'
 #' @param x An object.
 #'
-#' @return `TRUE` if the object inherits from the `menu` class.
+#' @return `TRUE` if the object inherits from the `navigatr_menu` class.
 #'
 #' @export
 is_menu <- function(x) {
-  inherits(x, "menu")
+  inherits(x, "navigatr_menu")
 }
 
 #' @importFrom pillar tbl_sum
 #' @export
-tbl_sum.menu <- function(x) {
+tbl_sum.navigatr_menu <- function(x) {
   key <- x$key
   out <- purrr::map_chr(key,
                         function(key) {
@@ -75,7 +75,7 @@ tbl_sum.menu <- function(x) {
 }
 
 #' @export
-format.menu <- function(x, ...) {
+format.navigatr_menu <- function(x, ...) {
   subtle_comment(c(format_menu(x), ""))
 }
 
@@ -111,7 +111,7 @@ format_menu <- function(x, path = integer()) {
 }
 
 #' @export
-print.menu <- function(x, ...) {
+print.navigatr_menu <- function(x, ...) {
   writeLines(format(x))
   print_menu()
   invisible(x)
@@ -119,4 +119,9 @@ print.menu <- function(x, ...) {
 
 print_menu <- function() {
   writeLines(subtle_comment("Please `activate()` an item."))
+}
+
+#' @export
+vec_ptype_abbr.navigatr_menu <- function(x) {
+  "menu"
 }

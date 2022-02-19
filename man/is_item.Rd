@@ -10,7 +10,7 @@ is_item(x)
 \item{x}{An object.}
 }
 \value{
-\code{TRUE} if the object inherits from the \code{item} class.
+\code{TRUE} if the object inherits from the \code{navigatr_item} class.
 }
 \description{
 Test if an object is an item

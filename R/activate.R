@@ -2,7 +2,7 @@
 #'
 #' Activates a menu item with the same syntax as [dplyr::pull()].
 #' Activating a menu item allows you to perform operations on the active item.
-#' `activate()` turns a `menu` object into an `item` object,
+#' `activate()` turns a `navigatr_menu` object into an `navigatr_item` object,
 #' and `deactivate()` turns it back.
 #'
 #' @param .data A menu.
@@ -10,13 +10,13 @@
 #' In `deactivate()`, unused (for extensibility).
 #' @param .add Whether to add new variables to the path indices.
 #' If `FALSE` (default value), the menu will be deactivated first by [deactivate()].
-#' @param x A `menu` object.
+#' @param x A `navigatr_menu` object.
 #' @param deep If `TRUE` (default value), deactivate recursively.
 #'
-#' @return In `activate()`, An `item` object.
-#' If it inherits from class `menu`, the menu will be displayed hierarchically.
+#' @return In `activate()`, An `navigatr_item` object.
+#' If it inherits from class `navigatr_menu`, the menu will be displayed hierarchically.
 #' Otherwise, the active data will be displayed.
-#' In `deactivate()`, A `menu` object.
+#' In `deactivate()`, A `navigatr_menu` object.
 #'
 #' @examples
 #' library(dplyr)
@@ -49,7 +49,7 @@ activate <- function(.data, ..., .add = FALSE) {
 
 #' @rdname activate
 #' @export
-activate.menu <- function(.data, ..., .add = FALSE) {
+activate.navigatr_menu <- function(.data, ..., .add = FALSE) {
   vars <- enquos(...)
 
   if (!is_empty(vars)) {
@@ -63,12 +63,12 @@ activate.menu <- function(.data, ..., .add = FALSE) {
                            function(x) {
                              x[[1]]
                            })
-    attr_item <- list(parent = .data,
-                      path = c(item_path(.data), loc),
-                      attr_names = names2(attrs))
+    tree <- list(parent = .data,
+                 path = c(item_path(.data), loc),
+                 attr_names = names2(attrs))
     .data <- item(x,
                   attrs = attrs,
-                  attr_item = attr_item)
+                  tree = tree)
 
     # activate recursively
     vars <- vars[-1]
@@ -82,7 +82,7 @@ activate.menu <- function(.data, ..., .add = FALSE) {
 
 #' @rdname activate
 #' @export
-activate.item <- function(.data, ..., .add = FALSE) {
+activate.navigatr_item <- function(.data, ..., .add = FALSE) {
   if (!.add) {
     .data <- deactivate(.data)
   }
@@ -90,7 +90,7 @@ activate.item <- function(.data, ..., .add = FALSE) {
   stopifnot(
     is_menu(.data)
   )
-  activate.menu(.data, ...)
+  activate.navigatr_menu(.data, ...)
 }
 
 #' @rdname activate
@@ -101,13 +101,13 @@ deactivate <- function(x, ..., deep = TRUE) {
 
 #' @rdname activate
 #' @export
-deactivate.menu <- function(x, ..., deep = TRUE) {
+deactivate.navigatr_menu <- function(x, ..., deep = TRUE) {
   x
 }
 
 #' @rdname activate
 #' @export
-deactivate.item <- function(x, ..., deep = TRUE) {
+deactivate.navigatr_item <- function(x, ..., deep = TRUE) {
   parent <- item_parent(x)
   path <- item_path(x)
   attr_names <- item_attr_names(x)
