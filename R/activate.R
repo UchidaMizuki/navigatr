@@ -112,7 +112,7 @@ deactivate.navigatr_item <- function(x, ..., deep = TRUE) {
   path <- item_path(x)
   attr_names <- item_attr_names(x)
 
-  loc <- path[[length(path)]]
+  loc <- path[[vec_size(path)]]
 
   for (attr_name in attr_names) {
     parent$attrs[[attr_name]][[loc]] <- attr(x, attr_name)

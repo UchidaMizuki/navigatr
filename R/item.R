@@ -22,6 +22,21 @@ is_item <- function(x) {
 }
 
 #' @export
+rekey <- function(data, new_key) {
+  stopifnot(
+    is_scalar_character(new_key)
+  )
+
+  parent <- item_parent(data)
+  path <- item_path(data)
+
+  loc <- path[[vec_size(path)]]
+  parent$key[[loc]] <- new_key
+  item_parent(data) <- parent
+  data
+}
+
+#' @export
 format.navigatr_item <- function(x, ...) {
   subtle_comment(c(format_menu(deactivate(x), item_path(x)), ""))
 }
@@ -47,8 +62,18 @@ navigatr_tree <- function(x) {
   attr(x, "navigatr_tree")
 }
 
+`navigatr_tree<-` <- function(x, value) {
+  attr(x, "navigatr_tree") <- value
+  x
+}
+
 item_parent <- function(x) {
   navigatr_tree(x)$parent %||% new_menu()
+}
+
+`item_parent<-` <- function(x, value) {
+  navigatr_tree(x)$parent <- value
+  x
 }
 
 item_path <- function(x) {
