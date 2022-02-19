@@ -5,7 +5,7 @@
 #' `activate()` turns a `navigatr_menu` object into an `navigatr_item` object,
 #' and `deactivate()` turns it back.
 #'
-#' @param .data A menu.
+#' @param .data A `navigatr_menu` object.
 #' @param ... In `activate()`, one or more variables passed to [dplyr::pull()].
 #' In `deactivate()`, unused (for extensibility).
 #' @param .add Whether to add new variables to the path indices.
@@ -63,7 +63,8 @@ activate.navigatr_menu <- function(.data, ..., .add = FALSE) {
                            function(x) {
                              x[[1]]
                            })
-    tree <- list(parent = .data,
+    tree <- list(key = key[[loc]],
+                 parent = .data,
                  path = c(item_path(.data), loc),
                  attr_names = names2(attrs))
     .data <- item(x,
@@ -108,18 +109,20 @@ deactivate.navigatr_menu <- function(x, ..., deep = TRUE) {
 #' @rdname activate
 #' @export
 deactivate.navigatr_item <- function(x, ..., deep = TRUE) {
+  key <- item_key(x)
   parent <- item_parent(x)
   path <- item_path(x)
   attr_names <- item_attr_names(x)
 
   loc <- path[[vec_size(path)]]
 
+  parent$key[[loc]] <- key
+  parent$value[[loc]] <- unitem(x)
+
   for (attr_name in attr_names) {
     parent$attrs[[attr_name]][[loc]] <- attr(x, attr_name)
     attr(x, attr_name) <- NULL
   }
-
-  parent$value[[loc]] <- unitem(x)
 
   if (deep) {
     parent <- deactivate(parent)
