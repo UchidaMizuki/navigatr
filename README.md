@@ -58,7 +58,8 @@ mn1
 
 You can activate a menu item by `activate()`. Activating a menu item
 allows you to perform operations on the active item. `activate()` turns
-a `menu` object into an `item` object, and `deactivate()` turns it back.
+a `navigatr_menu` object into an `navigatr_item` object, and
+`deactivate()` turns it back.
 
 ``` r
 mn1_1 <- mn1 %>%
