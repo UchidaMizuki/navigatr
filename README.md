@@ -4,6 +4,9 @@
 # navigatr
 
 <!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/navigatr)](https://CRAN.R-project.org/package=navigatr)
 <!-- badges: end -->
 
 navigatr provides a navigation menu to enable pipe-friendly data
