@@ -33,13 +33,7 @@ print.item <- function(x, ...) {
   if (is_menu(x)) {
     print_menu()
   } else {
-    out <- unitem(x)
-
-    # For tibble printing problems
-    if (tibble::is_tibble(out) && !tibble::has_rownames(out)) {
-      out <- tibble::remove_rownames(out)
-    }
-    print(out)
+    print(unitem(x))
   }
   invisible(x)
 }
