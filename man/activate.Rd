@@ -22,7 +22,7 @@ deactivate(x, ..., deep = TRUE)
 \method{deactivate}{navigatr_item}(x, ..., deep = TRUE)
 }
 \arguments{
-\item{.data}{A menu.}
+\item{.data}{A \code{navigatr_menu} object.}
 
 \item{...}{In \code{activate()}, one or more variables passed to \code{\link[dplyr:pull]{dplyr::pull()}}.
 In \code{deactivate()}, unused (for extensibility).}
