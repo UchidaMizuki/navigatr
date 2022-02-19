@@ -2,24 +2,24 @@
 % Please edit documentation in R/activate.R
 \name{activate}
 \alias{activate}
-\alias{activate.menu}
-\alias{activate.item}
+\alias{activate.navigatr_menu}
+\alias{activate.navigatr_item}
 \alias{deactivate}
-\alias{deactivate.menu}
-\alias{deactivate.item}
+\alias{deactivate.navigatr_menu}
+\alias{deactivate.navigatr_item}
 \title{Activate/deactivate a menu item}
 \usage{
 activate(.data, ..., .add = FALSE)
 
-\method{activate}{menu}(.data, ..., .add = FALSE)
+\method{activate}{navigatr_menu}(.data, ..., .add = FALSE)
 
-\method{activate}{item}(.data, ..., .add = FALSE)
+\method{activate}{navigatr_item}(.data, ..., .add = FALSE)
 
 deactivate(x, ..., deep = TRUE)
 
-\method{deactivate}{menu}(x, ..., deep = TRUE)
+\method{deactivate}{navigatr_menu}(x, ..., deep = TRUE)
 
-\method{deactivate}{item}(x, ..., deep = TRUE)
+\method{deactivate}{navigatr_item}(x, ..., deep = TRUE)
 }
 \arguments{
 \item{.data}{A menu.}
@@ -30,20 +30,20 @@ In \code{deactivate()}, unused (for extensibility).}
 \item{.add}{Whether to add new variables to the path indices.
 If \code{FALSE} (default value), the menu will be deactivated first by \code{\link[=deactivate]{deactivate()}}.}
 
-\item{x}{A \code{menu} object.}
+\item{x}{A \code{navigatr_menu} object.}
 
 \item{deep}{If \code{TRUE} (default value), deactivate recursively.}
 }
 \value{
-In \code{activate()}, An \code{item} object.
-If it inherits from class \code{menu}, the menu will be displayed hierarchically.
+In \code{activate()}, An \code{navigatr_item} object.
+If it inherits from class \code{navigatr_menu}, the menu will be displayed hierarchically.
 Otherwise, the active data will be displayed.
-In \code{deactivate()}, A \code{menu} object.
+In \code{deactivate()}, A \code{navigatr_menu} object.
 }
 \description{
 Activates a menu item with the same syntax as \code{\link[dplyr:pull]{dplyr::pull()}}.
 Activating a menu item allows you to perform operations on the active item.
-\code{activate()} turns a \code{menu} object into an \code{item} object,
+\code{activate()} turns a \code{navigatr_menu} object into an \code{navigatr_item} object,
 and \code{deactivate()} turns it back.
 }
 \examples{

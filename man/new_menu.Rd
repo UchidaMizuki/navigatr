@@ -27,7 +27,7 @@ When an item becomes active, the attrs will be added to its attributes.}
 \item{class}{A character vector of subclasses passed to \code{\link[vctrs:new_data_frame]{vctrs::new_data_frame()}}.}
 }
 \value{
-A \code{menu} object, a subclass of class \code{data.frame}.
+A \code{navigatr_menu} object, a subclass of class \code{data.frame}.
 }
 \description{
 To build a new navigation menu, give \code{new_menu()} unique keys and a list of their corresponding values.

@@ -1,18 +1,18 @@
 #' @importFrom dplyr group_by
 #' @export
-group_by.item <- function(.data, ...) {
+group_by.navigatr_item <- function(.data, ...) {
   item_wrap(group_by)(.data, ...)
 }
 
 #' @importFrom dplyr rowwise
 #' @export
-rowwise.item <- function(.data, ...) {
+rowwise.navigatr_item <- function(.data, ...) {
   item_wrap(rowwise)(.data, ...)
 }
 
 #' @importFrom dplyr summarise
 #' @export
-summarise.item <- function(.data, ...,
+summarise.navigatr_item <- function(.data, ...,
                            .groups = NULL) {
   item_wrap(summarise)(.data, ...,
                        .groups = .groups)
@@ -20,13 +20,13 @@ summarise.item <- function(.data, ...,
 
 item_wrap <- function(.f) {
   function(.data, ...) {
-    attr_item <- attr(.data, "item")
-    attrs <- attributes(.data)[attr_item$attr_names]
+    tree <- navigatr_tree(.data)
+    attrs <- attributes(.data)[tree$attr_names]
 
     .data <- .f(unitem(.data), ...)
 
     item(.data,
          attrs = attrs,
-         attr_item = attr_item)
+         tree = tree)
   }
 }
