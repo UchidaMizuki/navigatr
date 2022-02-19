@@ -1,12 +1,12 @@
-test_that("menu", {
+test_that("menu-bands", {
   library(dplyr)
   mn1 <- new_menu(key = c("band_members", "band_instruments"),
                   value = list(band_members, band_instruments))
-  expect_s3_class(mn1, "menu")
+  expect_true(is_menu(mn1))
 
   mn1_1 <- mn1 %>%
     activate(band_members)
-  expect_s3_class(mn1_1, "item")
+  expect_true(is_item(mn1_1))
 
   mn1_2 <- mn1_1 %>%
     filter(band == "Beatles")
@@ -22,9 +22,48 @@ test_that("menu", {
 
   mn2 <- new_menu(key = c("key1", "key2"),
                   value = list(mn1, mn1))
-  expect_s3_class(mn2, "menu")
+  expect_true(is_menu(mn2))
 
   mn2_1 <- mn2 %>%
     activate(key1, band_instruments)
-  expect_s3_class(mn2_1, "item")
+  expect_true(is_item(mn2_1))
+})
+
+test_that("menu-vector", {
+  library(dplyr)
+
+  mn <- new_menu(1:3, 1:3)
+  expect_true(is_menu(mn))
+
+  mn_1 <- mn %>%
+    activate(1)
+  expect_true(is_item(mn_1))
+
+  expect_error({
+    mn %>%
+      activate(4)
+  })
+})
+
+test_that("menu-attrs", {
+  library(dplyr)
+
+  mn <- new_menu(1:3, 1:3,
+                 attrs = tibble::tibble(col1 = 1:3,
+                                        col2 = list(1, 2, 3)))
+  expect_true(is_menu(mn))
+
+  mn_1 <- mn %>%
+    activate(1)
+  expect_true(is_item(mn_1))
+
+  attr(mn_1, "col1") <- 123
+  attr(mn_1, "col2") <- 1234
+
+  mn_new <- mn_1 %>%
+    deactivate()
+  expect_true(is_menu(mn_new))
+
+  expect_equal(mn_new$attrs$col1[[1]], 123)
+  expect_equal(mn_new$attrs$col2[[1]], 1234)
 })
