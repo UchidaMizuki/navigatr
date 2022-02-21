@@ -49,8 +49,8 @@ test_that("menu-attrs", {
   library(dplyr)
 
   mn <- new_menu(1:3, 1:3,
-                 attrs = tibble::tibble(col1 = 1:3,
-                                        col2 = list(1, 2, 3)))
+                 attrs = tibble(col1 = 1:3,
+                                col2 = list(1, 2, 3)))
   expect_true(is_menu(mn))
 
   mn_1 <- mn %>%
@@ -72,8 +72,8 @@ test_that("menu-rekey", {
   library(dplyr)
 
   mn <- new_menu(c("key1", "key2", "key3"), 1:3,
-                 attrs = tibble::tibble(col1 = 1:3,
-                                        col2 = list(1, 2, 3)))
+                 attrs = tibble(col1 = 1:3,
+                                col2 = list(1, 2, 3)))
   mn <- mn %>%
     activate(key1) %>%
     rekey("new_key1") %>%
