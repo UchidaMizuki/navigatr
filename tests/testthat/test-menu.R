@@ -67,3 +67,26 @@ test_that("menu-attrs", {
   expect_equal(mn_new$attrs$col1[[1]], 123)
   expect_equal(mn_new$attrs$col2[[1]], 1234)
 })
+
+test_that("menu-rekey", {
+  library(dplyr)
+
+  mn <- new_menu(c("key1", "key2", "key3"), 1:3,
+                 attrs = tibble::tibble(col1 = 1:3,
+                                        col2 = list(1, 2, 3)))
+  mn <- mn %>%
+    activate(key1) %>%
+    rekey("new_key1") %>%
+    deactivate()
+
+  expect_equal(mn$key, c("new_key1", "key2", "key3"))
+
+  nested_mn <- new_menu(c("key1", "key2"),
+                        list(mn, mn))
+  nested_mn <- nested_mn %>%
+    activate(key1, key2) %>%
+    rekey("new_key2") %>%
+    deactivate(deep = FALSE)
+
+  expect_equal(nested_mn$key, c("new_key1", "new_key2", "key3"))
+})
