@@ -21,14 +21,14 @@
 #' @examples
 #' library(dplyr)
 #'
-#' mn1 <- new_menu(key = c("band_members", "band_instruments"),
-#'                 value = list(band_members, band_instruments))
-#' mn1
+#' band <- new_menu(key = c("band_members", "band_instruments"),
+#'                  value = list(band_members, band_instruments))
+#' band
 #'
 #' # You can also build a nested menu
-#' mn2 <- new_menu(key = c("key1", "key2"),
-#'                 value = list(mn1, mn1))
-#' mn2
+#' bands <- new_menu(key = c("key1", "key2"),
+#'                   value = list(band, band))
+#' bands
 #'
 #' @export
 new_menu <- function(key = character(),
