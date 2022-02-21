@@ -15,7 +15,6 @@ Imports:
     pillar,
     purrr,
     rlang,
-    tibble,
     tidyselect,
     vctrs
 Roxygen: list(markdown = TRUE)
