@@ -22,11 +22,12 @@ knitr::opts_chunk$set(
 navigatr provides a navigation menu to enable pipe-friendly data processing for hierarchical data structures.
 By activating the menu items, you can perform operations on each item while maintaining the overall structure in attributes.
 
-Only two functions, `new_menu()` and `activate()`, are the core functions of this package.
+Only three functions, `new_menu()`, `activate()` and `rekey()`, are the core functions of this package.
 Their roles are as follows,
 
-- `new_menu()` builds a new navigation menu that users can use with `activate()` (for developers)
-- `activate()` makes it easy to perform hierarchical data processing (for users)
+- `new_menu()` builds a new navigation menu.
+- `activate()` accesses a menu item.
+- `rekey()` renames the key of a menu item.
 
 ## Installation
 
@@ -55,9 +56,9 @@ The upper rows show the menu items (keys on the left, value summaries on the rig
 By defining `pillar::obj_sum`, you can change the way the summaries are displayed.
 
 ```{r}
-mn1 <- new_menu(key = c("band_members", "band_instruments"),
-                value = list(band_members, band_instruments))
-mn1
+band <- new_menu(key = c("band_members", "band_instruments"),
+                 value = list(band_members, band_instruments))
+band
 ```
 
 You can activate a menu item by `activate()`.
@@ -65,24 +66,33 @@ Activating a menu item allows you to perform operations on the active item.
 `activate()` turns a `navigatr_menu` object into an `navigatr_item` object, and `deactivate()` turns it back.
 
 ```{r}
-mn1_1 <- mn1 %>%
+band <- band %>%
   activate(band_members) %>%
   filter(band == "Beatles")
-mn1_1
+band
 ```
 
 ```{r}
-mn1_1 %>% 
+band <- band %>% 
   deactivate()
+band
+```
+
+The rekey() function is used to change the key of an activated menu item.
+
+```{r}
+band %>% 
+  activate(band_instruments) %>% 
+  rekey("new_band_instruments")
 ```
 
 You can also build a nested navigation menu.
 To activate the items, specify multiple variables.
 
 ```{r}
-mn2 <- new_menu(key = c("key1", "key2"),
-                value = list(mn1, mn1)) # A list of menu objects
-mn2 %>% 
+bands <- new_menu(key = c("key1", "key2"),
+                  value = list(band, band)) # A list of menu objects
+bands %>% 
   activate(key1, band_instruments) %>% 
   select(name)
 ```
