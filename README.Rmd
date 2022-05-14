@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/navigatr)](https://CRAN.R-project.org/package=navigatr)
 <!-- badges: end -->
 
-navigatr provides a navigation menu to enable pipe-friendly data processing for hierarchical data structures.
+navigatr provides a navigation menu to enable pipe-friendly data processing for hierarchical data structures. 
 By activating the menu items, you can perform operations on each item while maintaining the overall structure in attributes.
 
 Only three functions, `new_menu()`, `activate()` and `rekey()`, are the core functions of this package.

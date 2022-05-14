@@ -115,10 +115,10 @@ bands <- new_menu(key = c("key1", "key2"),
 bands |> 
   activate(key1, band_instruments) |> 
   select(name)
-#> # ☒ key1: menu [2 × 3]
+#> # ☒ key1: menu [2]
 #> #   ☐ band_members:     tibble [2 × 2]
 #> #   ☒ band_instruments: tibble [3 × 1]
-#> # ☐ key2: menu [2 × 3]
+#> # ☐ key2: menu [2]
 #> # 
 #> # A tibble: 3 × 1
 #>   name 
