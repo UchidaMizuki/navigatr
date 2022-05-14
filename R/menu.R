@@ -125,3 +125,9 @@ print_menu <- function() {
 vec_ptype_abbr.navigatr_menu <- function(x) {
   "menu"
 }
+
+#' @importFrom pillar size_sum
+#' @export
+size_sum.navigatr_menu <- function(x) {
+  paste0("[", big_mark(vec_size(x)), "]")
+}
