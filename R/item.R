@@ -21,19 +21,6 @@ is_item <- function(x) {
   inherits(x, "navigatr_item")
 }
 
-#' Rename a key
-#'
-#' @param data A `navigatr_item` object.
-#' @param new_key New key name.
-#'
-#' @return A `navigatr_item` object.
-#'
-#' @export
-rekey <- function(data, new_key) {
-  item_key(data) <- new_key
-  data
-}
-
 #' @export
 format.navigatr_item <- function(x, ...) {
   subtle_comment(c(format_menu(deactivate(x), item_path(x)), ""))
