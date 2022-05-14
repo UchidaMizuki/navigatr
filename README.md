@@ -52,8 +52,8 @@ on the left, value summaries on the right). By defining
 band <- new_menu(key = c("band_members", "band_instruments"),
                  value = list(band_members, band_instruments))
 band
-#> # [ ] band_members:     tibble [3 x 2]
-#> # [ ] band_instruments: tibble [3 x 2]
+#> # ☐ band_members:     tibble [3 × 2]
+#> # ☐ band_instruments: tibble [3 × 2]
 #> # 
 #> # Please `activate()` an item.
 ```
@@ -64,14 +64,14 @@ a `navigatr_menu` object into an `navigatr_item` object, and
 `deactivate()` turns it back.
 
 ``` r
-band <- band %>%
-  activate(band_members) %>%
+band <- band |>
+  activate(band_members) |>
   filter(band == "Beatles")
 band
-#> # [x] band_members:     tibble [2 x 2]
-#> # [ ] band_instruments: tibble [3 x 2]
+#> # ☒ band_members:     tibble [2 × 2]
+#> # ☐ band_instruments: tibble [3 × 2]
 #> # 
-#> # A tibble: 2 x 2
+#> # A tibble: 2 × 2
 #>   name  band   
 #>   <chr> <chr>  
 #> 1 John  Beatles
@@ -79,11 +79,11 @@ band
 ```
 
 ``` r
-band <- band %>% 
+band <- band |> 
   deactivate()
 band
-#> # [ ] band_members:     tibble [2 x 2]
-#> # [ ] band_instruments: tibble [3 x 2]
+#> # ☐ band_members:     tibble [2 × 2]
+#> # ☐ band_instruments: tibble [3 × 2]
 #> # 
 #> # Please `activate()` an item.
 ```
@@ -92,13 +92,13 @@ The rekey() function is used to change the key of an activated menu
 item.
 
 ``` r
-band %>% 
-  activate(band_instruments) %>% 
+band |> 
+  activate(band_instruments) |> 
   rekey("new_band_instruments")
-#> # [ ] band_members:         tibble [2 x 2]
-#> # [x] new_band_instruments: tibble [3 x 2]
+#> # ☐ band_members:         tibble [2 × 2]
+#> # ☒ new_band_instruments: tibble [3 × 2]
 #> # 
-#> # A tibble: 3 x 2
+#> # A tibble: 3 × 2
 #>   name  plays 
 #> * <chr> <chr> 
 #> 1 John  guitar
@@ -112,15 +112,15 @@ specify multiple variables.
 ``` r
 bands <- new_menu(key = c("key1", "key2"),
                   value = list(band, band)) # A list of menu objects
-bands %>% 
-  activate(key1, band_instruments) %>% 
+bands |> 
+  activate(key1, band_instruments) |> 
   select(name)
-#> # [x] key1: menu [2 x 3]
-#> #   [ ] band_members:     tibble [2 x 2]
-#> #   [x] band_instruments: tibble [3 x 1]
-#> # [ ] key2: menu [2 x 3]
+#> # ☒ key1: menu [2 × 3]
+#> #   ☐ band_members:     tibble [2 × 2]
+#> #   ☒ band_instruments: tibble [3 × 1]
+#> # ☐ key2: menu [2 × 3]
 #> # 
-#> # A tibble: 3 x 1
+#> # A tibble: 3 × 1
 #>   name 
 #> * <chr>
 #> 1 John 

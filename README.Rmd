@@ -66,14 +66,14 @@ Activating a menu item allows you to perform operations on the active item.
 `activate()` turns a `navigatr_menu` object into an `navigatr_item` object, and `deactivate()` turns it back.
 
 ```{r}
-band <- band %>%
-  activate(band_members) %>%
+band <- band |>
+  activate(band_members) |>
   filter(band == "Beatles")
 band
 ```
 
 ```{r}
-band <- band %>% 
+band <- band |> 
   deactivate()
 band
 ```
@@ -81,8 +81,8 @@ band
 The rekey() function is used to change the key of an activated menu item.
 
 ```{r}
-band %>% 
-  activate(band_instruments) %>% 
+band |> 
+  activate(band_instruments) |> 
   rekey("new_band_instruments")
 ```
 
@@ -92,7 +92,7 @@ To activate the items, specify multiple variables.
 ```{r}
 bands <- new_menu(key = c("key1", "key2"),
                   value = list(band, band)) # A list of menu objects
-bands %>% 
-  activate(key1, band_instruments) %>% 
+bands |> 
+  activate(key1, band_instruments) |> 
   select(name)
 ```
