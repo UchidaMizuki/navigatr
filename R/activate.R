@@ -125,7 +125,6 @@ deactivate.navigatr_item <- function(x, ..., deep = TRUE) {
 
   for (attr_name in attr_names) {
     parent$attrs[[attr_name]][[loc]] <- attr(x, attr_name)
-    attr(x, attr_name) <- NULL
   }
 
   if (deep) {
