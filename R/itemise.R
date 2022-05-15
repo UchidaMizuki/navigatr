@@ -32,7 +32,12 @@ itemise.navigatr_menu <- function(.data, ...) {
   locs <- vec_match(nms, keys)
 
   for (i in vec_seq_along(locs)) {
-    .data$value[[locs[[i]]]] <- args[[i]]
+    loc <- locs[[i]]
+    value <- .data$value[[loc]]
+    attrs <- attributes(value)
+    .data$value[[loc]] <- exec(structure,
+                               args[[i]],
+                               !!!attrs[!names(attrs) %in% c("names", "dim", "dimnames")])
   }
   .data
 }
@@ -47,7 +52,10 @@ itemise.navigatr_item <- function(.data, ...) {
     vec_assert(value,
                size = 1L)
 
-    .data[] <- value[[1L]]
+    attrs <- attributes(.data)
+    .data <- exec(structure,
+                  value[[1L]],
+                  !!!attrs[!names(attrs) %in% c("names", "dim", "dimnames")])
     .data
   }
 }
