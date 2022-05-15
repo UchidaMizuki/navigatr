@@ -20,7 +20,7 @@ itemize <- itemise
 itemise.navigatr_menu <- function(.data, ...) {
   args <- dots_list(...,
                     .named = TRUE,
-                    .homonyms = "first")
+                    .homonyms = "last")
   nms <- names(args)
   args <- unname(args)
 
