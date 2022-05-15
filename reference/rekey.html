@@ -57,16 +57,23 @@
 <span class="fu">rekey</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S3 method for navigatr_item</span>
-<span class="fu">rekey</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<span class="fu">rekey</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
+
+<span class="fu">rekey_with</span><span class="op">(</span><span class="va">.data</span>, <span class="va">.fn</span>, .keys <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>.data</dt>
-<dd><p>A <code>navigatr_menu</code> or <code>navigatr_item</code> object.</p></dd>
+<dd><p>For <code>rekey()</code>, A <code>navigatr_menu</code> or <code>navigatr_item</code> object. For
+<code>rekey_with()</code>, A <code>navigatr_menu</code> object.</p></dd>
 <dt>...</dt>
 <dd><p>For <code>navigatr_menu</code> objects, use <code>new_name = old_name</code>. For
 <code>navigatr_item</code> objects, a scalar character of the new key name.</p></dd>
+<dt>.fn</dt>
+<dd><p>A function used to transform the selected <code>.keys</code>.</p></dd>
+<dt>.keys</dt>
+<dd><p>Keys to rename; defaults to all keys.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
