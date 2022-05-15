@@ -4,6 +4,7 @@
 \alias{rekey}
 \alias{rekey.navigatr_menu}
 \alias{rekey.navigatr_item}
+\alias{rekey_with}
 \title{Rename key names}
 \usage{
 rekey(.data, ...)
@@ -11,12 +12,19 @@ rekey(.data, ...)
 \method{rekey}{navigatr_menu}(.data, ...)
 
 \method{rekey}{navigatr_item}(.data, ...)
+
+rekey_with(.data, .fn, .keys = dplyr::everything(), ...)
 }
 \arguments{
-\item{.data}{A \code{navigatr_menu} or \code{navigatr_item} object.}
+\item{.data}{For \code{rekey()}, A \code{navigatr_menu} or \code{navigatr_item} object. For
+\code{rekey_with()}, A \code{navigatr_menu} object.}
 
 \item{...}{For \code{navigatr_menu} objects, use \code{new_name = old_name}. For
 \code{navigatr_item} objects, a scalar character of the new key name.}
+
+\item{.fn}{A function used to transform the selected \code{.keys}.}
+
+\item{.keys}{Keys to rename; defaults to all keys.}
 }
 \value{
 A \code{navigatr_menu} or \code{navigatr_item} object.
