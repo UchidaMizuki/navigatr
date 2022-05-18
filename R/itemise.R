@@ -33,11 +33,23 @@ itemise.navigatr_menu <- function(.data, ...) {
 
   for (i in vec_seq_along(locs)) {
     loc <- locs[[i]]
+
     value <- .data$value[[loc]]
-    attrs <- attributes(value)
-    .data$value[[loc]] <- exec(structure,
-                               args[[i]],
-                               !!!attrs[!names(attrs) %in% c("names", "dim", "dimnames")])
+    attrs_value <- attributes(value)
+
+    arg <- args[[i]]
+    attrs_arg <- attributes(arg)
+
+    mostattributes(arg) <- c(attrs_arg,
+                             attrs_value[!names(attrs_value) %in% names(attrs_arg)])
+    if (is_empty_item(.data$value[[loc]])) {
+      class(arg) <- c(purrr::head_while(class(.data$value[[loc]]),
+                                        purrr::negate(is_empty_item)),
+                      "navigatr_empty_item",
+                      class(arg))
+    }
+
+    .data$value[[loc]] <- arg
   }
   .data
 }
@@ -48,14 +60,23 @@ itemise.navigatr_item <- function(.data, ...) {
   if (is_menu(.data)) {
     itemise.navigatr_menu(.data, ...)
   } else {
-    value <- list2(...)
-    vec_assert(value,
+    args <- list2(...)
+    vec_assert(args,
                size = 1L)
 
-    attrs <- attributes(.data)
-    .data <- exec(structure,
-                  value[[1L]],
-                  !!!attrs[!names(attrs) %in% c("names", "dim", "dimnames")])
-    .data
+    attrs_value <- attributes(.data)
+
+    arg <- args[[1L]]
+    attrs_arg <- attributes(arg)
+
+    mostattributes(arg) <- c(attrs_arg,
+                             attrs_value[!names(attrs_value) %in% names(attrs_arg)])
+    if (is_empty_item(.data)) {
+      class(arg) <- c(purrr::head_while(class(.data),
+                                        purrr::negate(is_empty_item)),
+                      "navigatr_empty_item",
+                      class(arg))
+    }
+    arg
   }
 }
