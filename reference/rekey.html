@@ -53,7 +53,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rekey</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
 
-<span class="co"># S3 method for navigatr_menu</span>
+<span class="co"># S3 method for navigatr_nav</span>
 <span class="fu">rekey</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S3 method for navigatr_item</span>
@@ -65,10 +65,10 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>.data</dt>
-<dd><p>For <code>rekey()</code>, A <code>navigatr_menu</code> or <code>navigatr_item</code> object. For
-<code>rekey_with()</code>, A <code>navigatr_menu</code> object.</p></dd>
+<dd><p>For <code>rekey()</code>, A <code>navigatr_nav</code> or <code>navigatr_item</code> object. For
+<code>rekey_with()</code>, A <code>navigatr_nav</code> object.</p></dd>
 <dt>...</dt>
-<dd><p>For <code>navigatr_menu</code> objects, use <code>new_name = old_name</code>. For
+<dd><p>For <code>navigatr_nav</code> objects, use <code>new_name = old_name</code>. For
 <code>navigatr_item</code> objects, a scalar character of the new key name.</p></dd>
 <dt>.fn</dt>
 <dd><p>A function used to transform the selected <code>.keys</code>.</p></dd>
@@ -77,7 +77,7 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code>navigatr_menu</code> or <code>navigatr_item</code> object.</p>
+    <p>A <code>navigatr_nav</code> or <code>navigatr_item</code> object.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
