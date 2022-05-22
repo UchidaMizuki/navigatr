@@ -2,21 +2,21 @@
 #'
 #' Activates a menu item with the same syntax as [dplyr::pull()].
 #' Activating a menu item allows you to perform operations on the active item.
-#' `activate()` turns a `navigatr_menu` object into an `navigatr_item` object,
+#' `activate()` turns a `navigatr_nav` object into an `navigatr_item` object,
 #' and `deactivate()` turns it back.
 #'
-#' @param .data A `navigatr_menu` object.
+#' @param .data A `navigatr_nav` object.
 #' @param ... In `activate()`, one or more variables passed to [dplyr::pull()].
 #' In `deactivate()`, unused (for extensibility).
 #' @param .add Whether to add new variables to the path indices.
 #' If `FALSE` (default value), the menu will be deactivated first by [deactivate()].
-#' @param x A `navigatr_menu` object.
+#' @param x A `navigatr_nav` object.
 #' @param deep If `TRUE` (default value), deactivate recursively.
 #'
 #' @return In `activate()`, An `navigatr_item` object.
-#' If it inherits from class `navigatr_menu`, the menu will be displayed hierarchically.
+#' If it inherits from class `navigatr_nav`, the menu will be displayed hierarchically.
 #' Otherwise, the active data will be displayed.
-#' In `deactivate()`, A `navigatr_menu` object.
+#' In `deactivate()`, A `navigatr_nav` object.
 #'
 #' @examples
 #' library(dplyr)
@@ -49,7 +49,7 @@ activate <- function(.data, ..., .add = FALSE) {
 
 #' @rdname activate
 #' @export
-activate.navigatr_menu <- function(.data, ..., .add = FALSE) {
+activate.navigatr_nav <- function(.data, ..., .add = FALSE) {
   vars <- enquos(...)
 
   if (!is_empty(vars)) {
@@ -89,9 +89,9 @@ activate.navigatr_item <- function(.data, ..., .add = FALSE) {
   }
 
   stopifnot(
-    is_menu(.data)
+    is_nav(.data)
   )
-  activate.navigatr_menu(.data, ...)
+  activate.navigatr_nav(.data, ...)
 }
 
 #' @rdname activate
@@ -102,7 +102,7 @@ deactivate <- function(x, ..., deep = TRUE) {
 
 #' @rdname activate
 #' @export
-deactivate.navigatr_menu <- function(x, ..., deep = TRUE) {
+deactivate.navigatr_nav <- function(x, ..., deep = TRUE) {
   x
 }
 

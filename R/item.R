@@ -5,33 +5,29 @@ item <- function(x, attrs, tree) {
 }
 
 unitem <- function(x) {
-  attr(x, "navigatr_tree") <- NULL
+  for (attr_name in item_attr_names(x)) {
+    attr(x, attr_name) <- NULL
+  }
+  navigatr_tree(x) <- NULL
   class(x) <- setdiff(class(x), "navigatr_item")
   x
 }
 
-#' Test if an object is an item
-#'
-#' @param x An object.
-#'
-#' @return `TRUE` if the object inherits from the `navigatr_item` class.
-#'
-#' @export
 is_item <- function(x) {
   inherits(x, "navigatr_item")
 }
 
 #' @export
 format.navigatr_item <- function(x, ...) {
-  subtle_comment(c(format_menu(deactivate(x), item_path(x)), ""))
+  subtle_comment(c(format_nav(deactivate(x), item_path(x)), ""))
 }
 
 #' @export
 print.navigatr_item <- function(x, ...) {
   writeLines(format(x))
 
-  if (is_menu(x)) {
-    print_menu()
+  if (is_nav(x)) {
+    print_nav_msg(x)
   } else {
     print(unitem(x))
   }

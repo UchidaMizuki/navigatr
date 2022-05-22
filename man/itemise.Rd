@@ -3,7 +3,7 @@
 \name{itemise}
 \alias{itemise}
 \alias{itemize}
-\alias{itemise.navigatr_menu}
+\alias{itemise.navigatr_nav}
 \alias{itemise.navigatr_item}
 \title{Update items}
 \usage{
@@ -11,18 +11,18 @@ itemise(.data, ...)
 
 itemize(.data, ...)
 
-\method{itemise}{navigatr_menu}(.data, ...)
+\method{itemise}{navigatr_nav}(.data, ...)
 
 \method{itemise}{navigatr_item}(.data, ...)
 }
 \arguments{
-\item{.data}{A \code{navigatr_menu} or \code{navigatr_item} object.}
+\item{.data}{A \code{navigatr_nav} or \code{navigatr_item} object.}
 
-\item{...}{For \code{navigatr_menu} objects, use \code{key_name = item_value}. For
+\item{...}{For \code{navigatr_nav} objects, use \code{key_name = item_value}. For
 \code{navigatr_item} objects, new item value.}
 }
 \value{
-A \code{navigatr_menu} or \code{navigatr_item} object.
+A \code{navigatr_nav} or \code{navigatr_item} object.
 }
 \description{
 Update items

@@ -2,24 +2,24 @@
 % Please edit documentation in R/rekey.R
 \name{rekey}
 \alias{rekey}
-\alias{rekey.navigatr_menu}
+\alias{rekey.navigatr_nav}
 \alias{rekey.navigatr_item}
 \alias{rekey_with}
 \title{Rename key names}
 \usage{
 rekey(.data, ...)
 
-\method{rekey}{navigatr_menu}(.data, ...)
+\method{rekey}{navigatr_nav}(.data, ...)
 
 \method{rekey}{navigatr_item}(.data, ...)
 
 rekey_with(.data, .fn, .keys = dplyr::everything(), ...)
 }
 \arguments{
-\item{.data}{For \code{rekey()}, A \code{navigatr_menu} or \code{navigatr_item} object. For
-\code{rekey_with()}, A \code{navigatr_menu} object.}
+\item{.data}{For \code{rekey()}, A \code{navigatr_nav} or \code{navigatr_item} object. For
+\code{rekey_with()}, A \code{navigatr_nav} object.}
 
-\item{...}{For \code{navigatr_menu} objects, use \code{new_name = old_name}. For
+\item{...}{For \code{navigatr_nav} objects, use \code{new_name = old_name}. For
 \code{navigatr_item} objects, a scalar character of the new key name.}
 
 \item{.fn}{A function used to transform the selected \code{.keys}.}
@@ -27,7 +27,7 @@ rekey_with(.data, .fn, .keys = dplyr::everything(), ...)
 \item{.keys}{Keys to rename; defaults to all keys.}
 }
 \value{
-A \code{navigatr_menu} or \code{navigatr_item} object.
+A \code{navigatr_nav} or \code{navigatr_item} object.
 }
 \description{
 Rename key names

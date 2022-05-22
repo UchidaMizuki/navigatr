@@ -1,13 +1,13 @@
 #' Rename key names
 #'
-#' @param .data For `rekey()`, A `navigatr_menu` or `navigatr_item` object. For
-#' `rekey_with()`, A `navigatr_menu` object.
-#' @param ... For `navigatr_menu` objects, use `new_name = old_name`. For
+#' @param .data For `rekey()`, A `navigatr_nav` or `navigatr_item` object. For
+#' `rekey_with()`, A `navigatr_nav` object.
+#' @param ... For `navigatr_nav` objects, use `new_name = old_name`. For
 #' `navigatr_item` objects, a scalar character of the new key name.
 #' @param .fn A function used to transform the selected `.keys`.
 #' @param .keys Keys to rename; defaults to all keys.
 #'
-#' @return A `navigatr_menu` or `navigatr_item` object.
+#' @return A `navigatr_nav` or `navigatr_item` object.
 #'
 #' @export
 rekey <- function(.data, ...) {
@@ -16,7 +16,7 @@ rekey <- function(.data, ...) {
 
 #' @rdname rekey
 #' @export
-rekey.navigatr_menu <- function(.data, ...) {
+rekey.navigatr_nav <- function(.data, ...) {
   keys <- set_names(.data$key)
   loc <- tidyselect::eval_rename(expr(c(...)), keys)
   .data$key[loc] <- names(loc)
@@ -28,8 +28,8 @@ rekey.navigatr_menu <- function(.data, ...) {
 rekey.navigatr_item <- function(.data, ...) {
   args <- list2(...)
 
-  if (is_menu(.data) && is_named(args)) {
-    rekey.navigatr_menu(.data, ...)
+  if (is_nav(.data) && is_named(args)) {
+    rekey.navigatr_nav(.data, ...)
   } else {
     name <- vec_c(!!!args)
     vec_assert(name, character(), 1L)
@@ -44,7 +44,7 @@ rekey.navigatr_item <- function(.data, ...) {
 rekey_with <- function(.data, .fn,
                        .keys = dplyr::everything(), ...) {
   stopifnot(
-    is_menu(.data)
+    is_nav(.data)
   )
 
   .fn <- as_function(.fn)
