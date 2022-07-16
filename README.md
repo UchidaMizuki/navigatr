@@ -46,7 +46,7 @@ library(dplyr)
 To build a new navigation menu, give `new_menu()` unique keys and a list
 of their corresponding values. The upper rows show the menu items (keys
 on the left, value summaries on the right). By defining
-`pillar::obj_sum`, you can change the way the summaries are displayed.
+`pillar::obj_sum()`, you can change the way the summaries are displayed.
 
 ``` r
 band <- new_menu(key = c("band_members", "band_instruments"),
@@ -55,12 +55,12 @@ band
 #> # ☐ band_members:     tibble [3 × 2]
 #> # ☐ band_instruments: tibble [3 × 2]
 #> # 
-#> # Please `activate()` an item.
+#> # Please `activate()`.
 ```
 
 You can activate a menu item by `activate()`. Activating a menu item
 allows you to perform operations on the active item. `activate()` turns
-a `navigatr_menu` object into an `navigatr_item` object, and
+a `navigatr_new_menu` object into an `navigatr_nav_item` object, and
 `deactivate()` turns it back.
 
 ``` r
@@ -85,10 +85,10 @@ band
 #> # ☐ band_members:     tibble [2 × 2]
 #> # ☐ band_instruments: tibble [3 × 2]
 #> # 
-#> # Please `activate()` an item.
+#> # Please `activate()`.
 ```
 
-The rekey() function is used to change the key of an activated menu
+The `rekey()` function is used to change the key of an activated menu
 item.
 
 ``` r

@@ -32,7 +32,7 @@ test_that("menu-bands", {
 test_that("menu-vector", {
   library(dplyr)
 
-  mn <- new_menu(1:3, 1:3)
+  mn <- new_menu(as.character(1:3), 1:3)
   expect_true(is_menu(mn))
 
   mn_1 <- mn %>%
@@ -48,7 +48,7 @@ test_that("menu-vector", {
 test_that("menu-attrs", {
   library(dplyr)
 
-  mn <- new_menu(1:3, 1:3,
+  mn <- new_menu(as.character(1:3), 1:3,
                  attrs = tibble(col1 = 1:3,
                                 col2 = list(1, 2, 3)))
   expect_true(is_menu(mn))
@@ -94,42 +94,4 @@ test_that("menu-rekey", {
     rekey(new_key3 = key3)
 
   expect_equal(nested_mn$key, c("new_key1", "new_key2", "new_key3"))
-})
-
-test_that("menu-itemise", {
-  library(dplyr)
-
-  mn1 <- new_menu(c("key1", "key2", "key3"), letters[1:3])
-
-  mn2 <- mn1 %>%
-    itemise(key1 = "aaa")
-
-  mn3 <- mn1 %>%
-    activate(1) %>%
-    itemise("aaa") %>%
-    deactivate()
-
-  expect_equal(mn2 %>%
-                 activate(key1) %>%
-                 as.character(),
-               "aaa")
-
-  expect_equal(mn3 %>%
-                 activate(key1) %>%
-                 as.character(),
-               "aaa")
-
-  x <- as.list(letters[1:3])
-  x <- x %>%
-    purrr::modify(function(x) {
-      class(x) <- "test"
-      x
-    })
-  mn <- new_menu(c("key1", "key2", "key3"), x)
-
-  expect_equal(mn %>%
-                 itemise(key1 = "a") %>%
-                 activate(key1) %>%
-                 class(),
-               c("navigatr_item", "test"))
 })

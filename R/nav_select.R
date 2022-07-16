@@ -17,3 +17,11 @@ is_select <- function(x) {
 vec_ptype_abbr.navigatr_nav_select <- function(x) {
   "select"
 }
+
+#' @importFrom dplyr select
+#' @export
+select.navigatr_nav_select <- function(.data, ...) {
+  keys <- set_names(.data$key)
+  loc <- tidyselect::eval_select(expr(c(...)), keys)
+  vec_slice(.data, loc)
+}

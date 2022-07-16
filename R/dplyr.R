@@ -1,13 +1,5 @@
 #' @importFrom dplyr select
 #' @export
-select.navigatr_nav <- function(.data, ...) {
-  keys <- set_names(.data$key)
-  loc <- tidyselect::eval_select(expr(c(...)), keys)
-  vec_slice(.data, loc)
-}
-
-#' @importFrom dplyr select
-#' @export
 select.navigatr_item <- function(.data, ...) {
   item_wrap(select)(.data, ...)
 }

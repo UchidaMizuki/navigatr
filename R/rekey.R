@@ -26,12 +26,10 @@ rekey.navigatr_nav <- function(.data, ...) {
 #' @rdname rekey
 #' @export
 rekey.navigatr_item <- function(.data, ...) {
-  args <- list2(...)
-
-  if (is_nav(.data) && is_named(args)) {
+  if (is_nav(.data) && is_named(enquos(...))) {
     rekey.navigatr_nav(.data, ...)
   } else {
-    name <- vec_c(!!!args)
+    name <- vec_c(!!!list2(...))
     vec_assert(name, character(), 1L)
 
     item_key(.data) <- name
