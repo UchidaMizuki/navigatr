@@ -41,6 +41,7 @@ devtools::install_github("UchidaMizuki/navigatr")
 ``` r
 library(navigatr)
 library(dplyr)
+#> Warning: package 'dplyr' was built under R version 4.2.1
 ```
 
 To build a new navigation menu, give `new_menu()` unique keys and a list
@@ -49,8 +50,8 @@ on the left, value summaries on the right). By defining
 `pillar::obj_sum()`, you can change the way the summaries are displayed.
 
 ``` r
-band <- new_menu(key = c("band_members", "band_instruments"),
-                 value = list(band_members, band_instruments))
+band <- new_nav_menu(key = c("band_members", "band_instruments"),
+                     value = list(band_members, band_instruments))
 band
 #> # ☐ band_members:     tibble [3 × 2]
 #> # ☐ band_instruments: tibble [3 × 2]
@@ -112,13 +113,15 @@ specify multiple variables.
 ``` r
 bands <- new_menu(key = c("key1", "key2"),
                   value = list(band, band)) # A list of menu objects
+#> Warning: `new_menu()` was deprecated in navigatr 1.0.0.
+#> Please use `new_nav_menu()` instead.
 bands |> 
   activate(key1, band_instruments) |> 
   select(name)
-#> # ☒ key1: menu [2]
+#> # ☒ key1: nav_menu [2]
 #> #   ☐ band_members:     tibble [2 × 2]
 #> #   ☒ band_instruments: tibble [3 × 1]
-#> # ☐ key2: menu [2]
+#> # ☐ key2: nav_menu [2]
 #> # 
 #> # A tibble: 3 × 1
 #>   name 

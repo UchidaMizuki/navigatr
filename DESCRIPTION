@@ -12,13 +12,15 @@ LazyData: true
 Imports: 
     cli,
     dplyr,
+    lifecycle,
     pillar,
     purrr,
     rlang,
+    stickyr,
     tidyselect,
     vctrs
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

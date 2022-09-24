@@ -56,8 +56,8 @@ The upper rows show the menu items (keys on the left, value summaries on the rig
 By defining `pillar::obj_sum()`, you can change the way the summaries are displayed.
 
 ```{r}
-band <- new_menu(key = c("band_members", "band_instruments"),
-                 value = list(band_members, band_instruments))
+band <- new_nav_menu(key = c("band_members", "band_instruments"),
+                     value = list(band_members, band_instruments))
 band
 ```
 

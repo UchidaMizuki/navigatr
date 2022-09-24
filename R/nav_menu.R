@@ -1,6 +1,6 @@
 #' Build a new navigation menu
 #'
-#' To build a new navigation menu, give `new_menu()` unique keys and a list of their corresponding values.
+#' To build a new navigation menu, give `new_nav_menu()` unique keys and a list of their corresponding values.
 #' The top row shows the menu items (keys on the left, value summaries on the right).
 #' The summaries are [pillar::obj_sum] outputs, so you can change the printing methods.
 #' Each menu item can be accessed by [activate()].
@@ -21,17 +21,17 @@
 #' @examples
 #' library(dplyr)
 #'
-#' band <- new_menu(key = c("band_members", "band_instruments"),
-#'                  value = list(band_members, band_instruments))
+#' band <- new_nav_menu(key = c("band_members", "band_instruments"),
+#'                      value = list(band_members, band_instruments))
 #' band
 #'
 #' # You can also build a nested menu
-#' bands <- new_menu(key = c("key1", "key2"),
-#'                   value = list(band, band))
+#' bands <- new_nav_menu(key = c("key1", "key2"),
+#'                       value = list(band, band))
 #' bands
 #'
 #' @export
-new_menu <- function(key = character(),
+new_nav_menu <- function(key = character(),
                      value = list(),
                      attrs = NULL, ...,
                      class = character()) {
@@ -41,11 +41,11 @@ new_menu <- function(key = character(),
           class = c(class, "navigatr_nav_menu"))
 }
 
-is_menu <- function(x) {
+is_nav_menu <- function(x) {
   inherits(x, "navigatr_nav_menu")
 }
 
 #' @export
 vec_ptype_abbr.navigatr_nav_menu <- function(x) {
-  "menu"
+  "nav_menu"
 }
