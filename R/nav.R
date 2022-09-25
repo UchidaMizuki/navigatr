@@ -4,13 +4,13 @@ new_nav <- function(key = character(),
                     class = character()) {
   key <- vec_cast(key, character())
 
-  if (!is_list(value)) {
-    value <- vec_chop(value)
+  if (vec_duplicate_any(key)) {
+    abort("`key` must not be duplicated.")
   }
 
-  stopifnot(
-    !vec_duplicate_any(key)
-  )
+  if (!is_list(value)) {
+    abort("`value` must be a list.")
+  }
 
   new_data_frame(df_list(key = key,
                          value = value,
