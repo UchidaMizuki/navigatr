@@ -32,9 +32,22 @@
 #'
 #' @export
 new_nav_menu <- function(key = character(),
-                     value = list(),
-                     attrs = NULL, ...,
-                     class = character()) {
+                         value = list(),
+                         attrs = NULL, ...,
+                         class = character()) {
+  value <- purrr::map(value,
+                      function(x) {
+                        if (is.data.frame(x)) {
+                          if (stickyr::is_sticky_tibble(x)) {
+                            attr(x, "sticky_attrs") <- c("navigatr_tree", attr(x, "sticky_attrs"))
+                          } else {
+                            x <- stickyr::new_sticky_tibble(x,
+                                                            attrs = "navigatr_tree")
+                          }
+                        }
+                        x
+                      })
+
   new_nav(key = key,
           value = value,
           attrs = attrs, ...,
