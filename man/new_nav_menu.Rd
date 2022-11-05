@@ -6,7 +6,7 @@
 \usage{
 new_nav_menu(
   key = character(),
-  value = list(),
+  value = list(list()),
   attrs = NULL,
   ...,
   class = character()

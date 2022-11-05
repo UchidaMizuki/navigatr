@@ -32,7 +32,7 @@
 #'
 #' @export
 new_nav_menu <- function(key = character(),
-                         value = list(),
+                         value = list(list()),
                          attrs = NULL, ...,
                          class = character()) {
   value <- purrr::map(value,
@@ -60,6 +60,19 @@ new_nav_menu <- function(key = character(),
 
 is_nav_menu <- function(x) {
   inherits(x, "navigatr_nav_menu")
+}
+
+#' @export
+tbl_sum.navigatr_nav_menu <- function(x) {
+  key <- x$key
+  out <- purrr::map_chr(key,
+                        function(key) {
+                          child <- activate(x, key,
+                                            .add = TRUE)
+                          pillar::obj_sum(unitem(child, remove_attrs = FALSE))
+                        })
+  names(out) <- key
+  out
 }
 
 #' @export

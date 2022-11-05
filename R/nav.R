@@ -1,5 +1,5 @@
 new_nav <- function(key = character(),
-                    value = list(),
+                    value = list(list()),
                     attrs = data_frame(.size = 1L), ...,
                     class = character()) {
   key <- vec_cast(key, character())
@@ -40,15 +40,12 @@ format_nav <- function(x, path = integer()) {
       symbol <- off
     } else {
       loc <- path[[1L]]
-      symbol <- ifelse(vec_equal(vec_seq_along(x), loc,
-                                 na_equal = TRUE),
-                       on,
-                       off)
+      symbol <- vec_equal(vec_seq_along(x), loc,
+                          na_equal = TRUE)
+      symbol <- ifelse(symbol, on, off)
     }
 
-    out <- paste0(symbol, " ",
-                  pillar::align(paste0(names(out), ": ")),
-                  out)
+    out <- paste0(symbol, " ", pillar::align(paste0(names(out), ": ")), out)
 
     if (!is.null(loc)) {
       path <- path[-1L]
@@ -64,12 +61,8 @@ format_nav <- function(x, path = integer()) {
     on <- cli::symbol$tick
     off <- cli::symbol$cross
 
-    symbol <- ifelse(purrr::map_lgl(x$value, purrr::negate(is_empty)),
-                     on,
-                     off)
-    out <- paste0(symbol, " ",
-                  pillar::align(paste0(names(out), ": ")),
-                  out)
+    symbol <- ifelse(purrr::map_lgl(x$value, purrr::negate(is_empty)), on, off)
+    out <- paste0(symbol, " ", pillar::align(paste0(names(out), ": ")), out)
   }
   out
 }
@@ -87,19 +80,6 @@ print_nav_msg <- function(x) {
   } else if (is_nav_input(x)) {
     writeLines(subtle_comment("Please `itemise()`."))
   }
-}
-
-#' @export
-tbl_sum.navigatr_nav <- function(x) {
-  key <- x$key
-  out <- purrr::map_chr(key,
-                        function(key) {
-                          child <- activate(x, key,
-                                            .add = TRUE)
-                          pillar::obj_sum(unitem(child, remove_attrs = FALSE))
-                        })
-  names(out) <- key
-  out
 }
 
 #' @export
