@@ -1,10 +1,9 @@
 #' Update items
 #'
-#' @param .data A `navigatr_menu` or `navigatr_item` object.
-#' @param ... For `navigatr_menu` objects, use `key_name = item_value`. For
-#' `navigatr_item` objects, new item value.
+#' @param .data A `navigatr_nav_input` object.
+#' @param ... Key-value pairs.
 #'
-#' @return A `navigatr_menu` or `navigatr_item` object.
+#' @return A `navigatr_nav_input` object.
 #'
 #' @export
 itemise <- function(.data, ...) {
@@ -22,7 +21,7 @@ itemise <- function(.data, ...) {
   locs <- vec_match(nms, keys)
 
   for (i in vec_seq_along(locs)) {
-    .data$value[[locs[[i]]]][] <- args[[i]]
+    .data$value[[locs[[i]]]] <- args[[i]]
   }
   .data
 }
@@ -30,16 +29,3 @@ itemise <- function(.data, ...) {
 #' @rdname itemise
 #' @export
 itemize <- itemise
-
-# itemise.navigatr_item <- function(.data, ...) {
-#   if (is_menu(.data)) {
-#     itemise.navigatr_menu(.data, ...)
-#   } else {
-#     value <- list2(...)
-#     vec_assert(value,
-#                size = 1L)
-#
-#     .data[] <- value[[1L]]
-#     .data
-#   }
-# }

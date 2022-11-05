@@ -10,13 +10,12 @@ itemise(.data, ...)
 itemize(.data, ...)
 }
 \arguments{
-\item{.data}{A \code{navigatr_menu} or \code{navigatr_item} object.}
+\item{.data}{A \code{navigatr_nav_input} object.}
 
-\item{...}{For \code{navigatr_menu} objects, use \code{key_name = item_value}. For
-\code{navigatr_item} objects, new item value.}
+\item{...}{Key-value pairs.}
 }
 \value{
-A \code{navigatr_menu} or \code{navigatr_item} object.
+A \code{navigatr_nav_input} object.
 }
 \description{
 Update items
