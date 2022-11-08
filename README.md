@@ -7,6 +7,8 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/navigatr)](https://CRAN.R-project.org/package=navigatr)
+[![Codecov test
+coverage](https://codecov.io/gh/UchidaMizuki/navigatr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/UchidaMizuki/navigatr?branch=main)
 <!-- badges: end -->
 
 navigatr provides a navigation menu to enable pipe-friendly data
@@ -14,10 +16,10 @@ processing for hierarchical data structures. By activating the menu
 items, you can perform operations on each item while maintaining the
 overall structure in attributes.
 
-Only three functions, `new_menu()`, `activate()` and `rekey()`, are the
-core functions of this package. Their roles are as follows,
+Only three functions, `new_nav_menu()`, `activate()` and `rekey()`, are
+the core functions of this package. Their roles are as follows,
 
--   `new_menu()` builds a new navigation menu.
+-   `new_nav_menu()` builds a new navigation menu.
 -   `activate()` accesses a menu item.
 -   `rekey()` renames the key of a menu item.
 
@@ -41,7 +43,6 @@ devtools::install_github("UchidaMizuki/navigatr")
 ``` r
 library(navigatr)
 library(dplyr)
-#> Warning: package 'dplyr' was built under R version 4.2.1
 ```
 
 To build a new navigation menu, give `new_menu()` unique keys and a list
@@ -101,7 +102,7 @@ band |>
 #> # 
 #> # A tibble: 3 × 2
 #>   name  plays 
-#> * <chr> <chr> 
+#>   <chr> <chr> 
 #> 1 John  guitar
 #> 2 Paul  bass  
 #> 3 Keith guitar
@@ -111,10 +112,8 @@ You can also build a nested navigation menu. To activate the items,
 specify multiple variables.
 
 ``` r
-bands <- new_menu(key = c("key1", "key2"),
-                  value = list(band, band)) # A list of menu objects
-#> Warning: `new_menu()` was deprecated in navigatr 1.0.0.
-#> Please use `new_nav_menu()` instead.
+bands <- new_nav_menu(key = c("key1", "key2"),
+                      value = list(band, band)) # A list of menu objects
 bands |> 
   activate(key1, band_instruments) |> 
   select(name)
@@ -125,7 +124,7 @@ bands |>
 #> # 
 #> # A tibble: 3 × 1
 #>   name 
-#> * <chr>
+#>   <chr>
 #> 1 John 
 #> 2 Paul 
 #> 3 Keith
