@@ -25,6 +25,5 @@ Suggests:
     dplyr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://github.com/UchidaMizuki/navigatr,
-    https://uchidamizuki.github.io/navigatr/
 BugReports: https://github.com/UchidaMizuki/navigatr/issues
+URL: https://github.com/UchidaMizuki/navigatr
