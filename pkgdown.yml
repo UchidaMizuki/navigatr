@@ -1,8 +1,8 @@
 pandoc: 2.7.3
-pkgdown: 2.0.3
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-05-22T08:43Z
+last_built: 2022-11-08T16:07Z
 urls:
   reference: https://uchidamizuki.github.io/navigatr/reference
   article: https://uchidamizuki.github.io/navigatr/articles
