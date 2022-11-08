@@ -9,19 +9,22 @@
 status](https://www.r-pkg.org/badges/version/navigatr)](https://CRAN.R-project.org/package=navigatr)
 [![Codecov test
 coverage](https://codecov.io/gh/UchidaMizuki/navigatr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/UchidaMizuki/navigatr?branch=main)
+[![R-CMD-check](https://github.com/UchidaMizuki/navigatr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/UchidaMizuki/navigatr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-navigatr provides a navigation menu to enable pipe-friendly data
-processing for hierarchical data structures. By activating the menu
-items, you can perform operations on each item while maintaining the
-overall structure in attributes.
+navigatr provides navigation menus and input forms.
 
-Only three functions, `new_nav_menu()`, `activate()` and `rekey()`, are
-the core functions of this package. Their roles are as follows,
+navigatr’s navigation menu allows piped data processing for hierarchical
+data structures. By activating menu items, operations on each item can
+be performed while maintaining the overall structure with attributes.
+
+The core functions of this package are as follows,
 
 -   `new_nav_menu()` builds a new navigation menu.
--   `activate()` accesses a menu item.
--   `rekey()` renames the key of a menu item.
+    -   `activate()` accesses a menu item.
+-   `new_nav_input()` builds a new input form.
+    -   `itemise()` enters values into the form.
+-   `rekey()` and \`rekey_with()\`\` renames the key of a menu item.
 
 ## Installation
 
@@ -44,6 +47,8 @@ devtools::install_github("UchidaMizuki/navigatr")
 library(navigatr)
 library(dplyr)
 ```
+
+### Build a navigation menu
 
 To build a new navigation menu, give `new_menu()` unique keys and a list
 of their corresponding values. The upper rows show the menu items (keys
@@ -128,4 +133,25 @@ bands |>
 #> 1 John 
 #> 2 Paul 
 #> 3 Keith
+```
+
+### Build a input form
+
+``` r
+input <- new_nav_input(key = c("key1", "key2"))
+input
+#> # ✖ key1: chr [0]
+#> # ✖ key2: chr [0]
+#> # 
+#> # Please `itemise()`.
+```
+
+``` r
+input |> 
+  itemise(key1 = "value1",
+          key2 = "value2")
+#> # ✔ key1: chr [1]
+#> # ✔ key2: chr [1]
+#> # 
+#> # Please `itemise()`.
 ```
