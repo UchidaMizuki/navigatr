@@ -21,7 +21,7 @@ itemise <- function(.data, ...) {
   locs <- vec_match(nms, keys)
 
   for (i in vec_seq_along(locs)) {
-    .data$value[[locs[[i]]]] <- args[[i]]
+    .data$value[[locs[[i]]]] <- vec_cast(args[[i]], .data$value[[locs[[i]]]])
   }
   .data
 }

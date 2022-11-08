@@ -97,7 +97,7 @@ activate.navigatr_item <- function(.data, ...,
     abort("Too many variables to activate.")
   }
 
-  activate.navigatr_nav(.data, ...)
+  activate.navigatr_nav_menu(.data, ...)
 }
 
 #' @rdname activate

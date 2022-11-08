@@ -37,7 +37,7 @@ new_nav_menu <- function(key = character(),
                          class = character()) {
   value <- purrr::map(value,
                       function(x) {
-                        if (is.data.frame(x)) {
+                        if (is.data.frame(x) && !is_nav(x)) {
                           if (stickyr::is_sticky_tibble(x)) {
                             attr(x, "sticky_attrs") <- c(names(attrs), "navigatr_tree", attr(x, "sticky_attrs"))
                             attr(x, "class_grouped_df") <- c("navigatr_item", attr(x, "class_grouped_df"))
