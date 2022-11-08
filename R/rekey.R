@@ -40,7 +40,7 @@ rekey.navigatr_item <- function(.data, ...) {
 #' @rdname rekey
 #' @export
 rekey_with <- function(.data, .fn,
-                       .keys = dplyr::everything(), ...) {
+                       .keys = tidyselect::everything(), ...) {
   stopifnot(
     is_nav(.data)
   )
