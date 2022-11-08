@@ -1,7 +1,6 @@
 test_that("menu-bands", {
-  library(dplyr)
   mn1 <- new_nav_menu(key = c("band_members", "band_instruments"),
-                      value = list(band_members, band_instruments))
+                      value = list(dplyr::band_members, dplyr::band_instruments))
   expect_true(is_nav_menu(mn1))
 
   mn1_1 <- mn1 |>
@@ -9,7 +8,7 @@ test_that("menu-bands", {
   expect_true(is_item(mn1_1))
 
   mn1_2 <- mn1_1 |>
-    filter(band == "Beatles")
+    dplyr::filter(band == "Beatles")
   mn1_3 <- mn1_2 |>
     deactivate() |>
     activate(band_members)
@@ -30,8 +29,6 @@ test_that("menu-bands", {
 })
 
 test_that("menu-vector", {
-  library(dplyr)
-
   mn <- new_nav_menu(as.character(1:3), 1:3)
   expect_true(is_nav_menu(mn))
 
@@ -46,11 +43,9 @@ test_that("menu-vector", {
 })
 
 test_that("menu-attrs", {
-  library(dplyr)
-
   mn <- new_nav_menu(as.character(1:3), 1:3,
-                     attrs = tibble(col1 = 1:3,
-                                    col2 = list(1, 2, 3)))
+                     attrs = data_frame(col1 = 1:3,
+                                        col2 = list(1, 2, 3)))
   expect_true(is_nav_menu(mn))
 
   mn_1 <- mn |>
@@ -69,11 +64,9 @@ test_that("menu-attrs", {
 })
 
 test_that("menu-rekey", {
-  library(dplyr)
-
   mn <- new_nav_menu(c("key1", "key2", "key3"), 1:3,
-                     attrs = tibble(col1 = 1:3,
-                                    col2 = list(1, 2, 3)))
+                     attrs = data_frame(col1 = 1:3,
+                                        col2 = list(1, 2, 3)))
   mn <- mn |>
     activate(key1) |>
     rekey("new_key1") |>
