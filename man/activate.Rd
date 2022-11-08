@@ -29,7 +29,7 @@ In \code{deactivate()}, unused (for extensibility).}
 
 \item{.add}{Whether to add new variables to the path indices.
 If \code{FALSE} (default value), the menu will be deactivated first by
-\code{\link[=deactivate]{deactivate()}}.}
+\code{deactivate()}.}
 
 \item{x}{A \code{navigatr_nav_menu} object.}
 

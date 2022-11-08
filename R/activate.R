@@ -10,7 +10,7 @@
 #' In `deactivate()`, unused (for extensibility).
 #' @param .add Whether to add new variables to the path indices.
 #' If `FALSE` (default value), the menu will be deactivated first by
-#' [deactivate()].
+#' `deactivate()`.
 #' @param x A `navigatr_nav_menu` object.
 #' @param deep If `TRUE` (default value), deactivate recursively.
 #'

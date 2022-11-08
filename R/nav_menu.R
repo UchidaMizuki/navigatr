@@ -1,14 +1,12 @@
-#' Build a new navigation menu
+#' Build a new menu
 #'
-#' To build a new navigation menu, give `new_nav_menu()` unique keys and a list of their corresponding values.
-#' The top row shows the menu items (keys on the left, value summaries on the right).
+#' To build a new menu, give `new_nav_menu()` unique keys and a list of their corresponding values.
+#' Each line shows the menu items (keys on the left, value summaries on the right).
 #' The summaries are [pillar::obj_sum] outputs, so you can change the printing methods.
 #' Each menu item can be accessed by [activate()].
 #'
 #' @param key A unique character vector.
-#' If the key is not a character vector, it is converted to a character vector by [as.character()].
 #' @param value A list of values corresponding to the keys.
-#' If the value is not a list, it is converted to a list by [as.list()].
 #' @param attrs A data frame for additional attributes of items (an empty data frame by default).
 #' When an item becomes active, the attrs will be added to its attributes.
 #' @param ... Additional arguments passed to [vctrs::new_data_frame()].
@@ -32,7 +30,7 @@
 #'
 #' @export
 new_nav_menu <- function(key = character(),
-                         value = list(list()),
+                         value = list(data.frame()),
                          attrs = NULL, ...,
                          class = character()) {
   value <- purrr::map(value,

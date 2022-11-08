@@ -2,22 +2,20 @@
 % Please edit documentation in R/nav_menu.R
 \name{new_nav_menu}
 \alias{new_nav_menu}
-\title{Build a new navigation menu}
+\title{Build a new menu}
 \usage{
 new_nav_menu(
   key = character(),
-  value = list(list()),
+  value = list(data.frame()),
   attrs = NULL,
   ...,
   class = character()
 )
 }
 \arguments{
-\item{key}{A unique character vector.
-If the key is not a character vector, it is converted to a character vector by \code{\link[=as.character]{as.character()}}.}
+\item{key}{A unique character vector.}
 
-\item{value}{A list of values corresponding to the keys.
-If the value is not a list, it is converted to a list by \code{\link[=as.list]{as.list()}}.}
+\item{value}{A list of values corresponding to the keys.}
 
 \item{attrs}{A data frame for additional attributes of items (an empty data frame by default).
 When an item becomes active, the attrs will be added to its attributes.}
@@ -30,8 +28,8 @@ When an item becomes active, the attrs will be added to its attributes.}
 A \code{navigatr_nav_menu} object, a subclass of class \code{data.frame}.
 }
 \description{
-To build a new navigation menu, give \code{new_nav_menu()} unique keys and a list of their corresponding values.
-The top row shows the menu items (keys on the left, value summaries on the right).
+To build a new menu, give \code{new_nav_menu()} unique keys and a list of their corresponding values.
+Each line shows the menu items (keys on the left, value summaries on the right).
 The summaries are \link[pillar:type_sum]{pillar::obj_sum} outputs, so you can change the printing methods.
 Each menu item can be accessed by \code{\link[=activate]{activate()}}.
 }
