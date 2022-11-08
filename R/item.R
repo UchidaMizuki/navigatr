@@ -4,10 +4,14 @@ item <- function(x, attrs, tree) {
        class = c("navigatr_item", class(x)))
 }
 
-unitem <- function(x) {
-  for (attr_name in item_attr_names(x)) {
-    attr(x, attr_name) <- NULL
+unitem <- function(x,
+                   remove_attrs = TRUE) {
+  if (remove_attrs) {
+    for (attr_name in item_attr_names(x)) {
+      attr(x, attr_name) <- NULL
+    }
   }
+
   navigatr_tree(x) <- NULL
   class(x) <- setdiff(class(x), "navigatr_item")
   x
@@ -34,11 +38,6 @@ print.navigatr_item <- function(x, ...) {
   invisible(x)
 }
 
-#' @export
-vec_ptype_abbr.navigatr_item <- function(x) {
-  "item"
-}
-
 navigatr_tree <- function(x) {
   attr(x, "navigatr_tree")
 }
@@ -58,7 +57,7 @@ item_key <- function(x) {
 }
 
 item_parent <- function(x) {
-  navigatr_tree(x)$parent %||% new_menu()
+  navigatr_tree(x)$parent %||% new_nav_menu()
 }
 
 item_path <- function(x) {

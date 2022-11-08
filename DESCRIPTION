@@ -11,17 +11,19 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     cli,
-    dplyr,
+    lifecycle,
     pillar,
     purrr,
     rlang,
+    stickyr,
     tidyselect,
     vctrs
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Suggests: 
+    covr,
+    dplyr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://github.com/UchidaMizuki/navigatr,
-    https://uchidamizuki.github.io/navigatr/
 BugReports: https://github.com/UchidaMizuki/navigatr/issues
+URL: https://github.com/UchidaMizuki/navigatr

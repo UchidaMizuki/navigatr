@@ -13,7 +13,7 @@ rekey(.data, ...)
 
 \method{rekey}{navigatr_item}(.data, ...)
 
-rekey_with(.data, .fn, .keys = dplyr::everything(), ...)
+rekey_with(.data, .fn, .keys = tidyselect::everything(), ...)
 }
 \arguments{
 \item{.data}{For \code{rekey()}, A \code{navigatr_nav} or \code{navigatr_item} object. For

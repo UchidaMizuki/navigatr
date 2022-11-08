@@ -1,12 +1,16 @@
 new_nav <- function(key = character(),
-                    value = list(),
+                    value = list(list()),
                     attrs = data_frame(.size = 1L), ...,
                     class = character()) {
   key <- vec_cast(key, character())
-  value <- vec_cast(value, list())
-  stopifnot(
-    !vec_duplicate_any(key)
-  )
+
+  if (vec_duplicate_any(key)) {
+    abort("`key` must not be duplicated.")
+  }
+
+  if (!is_list(value)) {
+    abort("`value` must be a list.")
+  }
 
   new_data_frame(df_list(key = key,
                          value = value,
@@ -27,7 +31,7 @@ format.navigatr_nav <- function(x, ...) {
 format_nav <- function(x, path = integer()) {
   out <- tbl_sum(x)
 
-  if (is_menu(x)) {
+  if (is_nav_menu(x)) {
     on <- cli::symbol$checkbox_on
     off <- cli::symbol$checkbox_off
 
@@ -36,15 +40,12 @@ format_nav <- function(x, path = integer()) {
       symbol <- off
     } else {
       loc <- path[[1L]]
-      symbol <- ifelse(vec_equal(vec_seq_along(x), loc,
-                                 na_equal = TRUE),
-                       on,
-                       off)
+      symbol <- vec_equal(vec_seq_along(x), loc,
+                          na_equal = TRUE)
+      symbol <- ifelse(symbol, on, off)
     }
 
-    out <- paste0(symbol, " ",
-                  pillar::align(paste0(names(out), ": ")),
-                  out)
+    out <- paste0(symbol, " ", pillar::align(paste0(names(out), ": ")), out)
 
     if (!is.null(loc)) {
       path <- path[-1L]
@@ -56,21 +57,12 @@ format_nav <- function(x, path = integer()) {
         out <- append(out, out_child, loc)
       }
     }
-  } else if (is_form(x)) {
+  } else if (is_nav_input(x)) {
     on <- cli::symbol$tick
     off <- cli::symbol$cross
 
-    symbol <- ifelse(purrr::map_lgl(x$value, purrr::negate(is_empty)),
-                     on,
-                     off)
-    out <- paste0(symbol, " ",
-                  pillar::align(paste0(names(out), ": ")),
-                  out)
-  } else if (is_select(x)) {
-    symbol <- cli::symbol$bullet
-    out <- paste0(symbol, " ",
-                  pillar::align(paste0(names(out), ": ")),
-                  out)
+    symbol <- ifelse(purrr::map_lgl(x$value, purrr::negate(is_empty)), on, off)
+    out <- paste0(symbol, " ", pillar::align(paste0(names(out), ": ")), out)
   }
   out
 }
@@ -83,29 +75,11 @@ print.navigatr_nav <- function(x, ...) {
 }
 
 print_nav_msg <- function(x) {
-  if (is_menu(x)) {
+  if (is_nav_menu(x)) {
     writeLines(subtle_comment("Please `activate()`."))
-  } else if (is_form(x)) {
+  } else if (is_nav_input(x)) {
     writeLines(subtle_comment("Please `itemise()`."))
-  } else if (is_select(x)) {
-    writeLines(subtle_comment("Please `select()`."))
   }
-}
-
-
-
-#' @export
-tbl_sum.navigatr_nav <- function(x) {
-  key <- x$key
-  out <- purrr::map_chr(key,
-                        function(key) {
-                          child <- activate(x, key,
-                                            .add = TRUE)
-                          # child <- unitem(child)
-                          pillar::obj_sum(child)
-                        })
-  names(out) <- key
-  out
 }
 
 #' @export

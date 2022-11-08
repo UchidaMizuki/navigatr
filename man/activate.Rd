@@ -2,72 +2,74 @@
 % Please edit documentation in R/activate.R
 \name{activate}
 \alias{activate}
-\alias{activate.navigatr_nav}
+\alias{activate.navigatr_nav_menu}
 \alias{activate.navigatr_item}
 \alias{deactivate}
-\alias{deactivate.navigatr_nav}
+\alias{deactivate.navigatr_nav_menu}
 \alias{deactivate.navigatr_item}
 \title{Activate/deactivate a menu item}
 \usage{
 activate(.data, ..., .add = FALSE)
 
-\method{activate}{navigatr_nav}(.data, ..., .add = FALSE)
+\method{activate}{navigatr_nav_menu}(.data, ..., .add = FALSE)
 
 \method{activate}{navigatr_item}(.data, ..., .add = FALSE)
 
 deactivate(x, ..., deep = TRUE)
 
-\method{deactivate}{navigatr_nav}(x, ..., deep = TRUE)
+\method{deactivate}{navigatr_nav_menu}(x, ..., deep = TRUE)
 
 \method{deactivate}{navigatr_item}(x, ..., deep = TRUE)
 }
 \arguments{
-\item{.data}{A \code{navigatr_nav} object.}
+\item{.data}{A \code{navigatr_nav_menu} object.}
 
 \item{...}{In \code{activate()}, one or more variables passed to \code{\link[dplyr:pull]{dplyr::pull()}}.
 In \code{deactivate()}, unused (for extensibility).}
 
 \item{.add}{Whether to add new variables to the path indices.
-If \code{FALSE} (default value), the menu will be deactivated first by \code{\link[=deactivate]{deactivate()}}.}
+If \code{FALSE} (default value), the menu will be deactivated first by
+\code{deactivate()}.}
 
-\item{x}{A \code{navigatr_nav} object.}
+\item{x}{A \code{navigatr_nav_menu} object.}
 
 \item{deep}{If \code{TRUE} (default value), deactivate recursively.}
 }
 \value{
 In \code{activate()}, An \code{navigatr_item} object.
-If it inherits from class \code{navigatr_nav}, the menu will be displayed hierarchically.
+If it inherits from class \code{navigatr_nav_menu}, the menu will be displayed
+hierarchically.
 Otherwise, the active data will be displayed.
-In \code{deactivate()}, A \code{navigatr_nav} object.
+In \code{deactivate()}, A \code{navigatr_nav_menu} object.
 }
 \description{
 Activates a menu item with the same syntax as \code{\link[dplyr:pull]{dplyr::pull()}}.
 Activating a menu item allows you to perform operations on the active item.
-\code{activate()} turns a \code{navigatr_nav} object into an \code{navigatr_item} object,
-and \code{deactivate()} turns it back.
+\code{activate()} turns a \code{navigatr_nav_menu} object into an \code{navigatr_item}
+object, and \code{deactivate()} turns it back.
 }
 \examples{
 library(dplyr)
 
-mn1 <- new_menu(key = c("band_members", "band_instruments"),
-                value = list(band_members, band_instruments))
+mn1 <- new_nav_menu(key = c("band_members", "band_instruments"),
+                    value = list(band_members, band_instruments))
 
-mn1 \%>\%
-  activate(band_members) \%>\%
+mn1 |>
+  activate(band_members) |>
   filter(band == "Beatles")
 
 # Items can also be specified as integers
-mn1 \%>\%
+mn1 |>
   activate(2)
 
-mn1 \%>\%
-  activate(-1) \%>\%
+mn1 |>
+  activate(-1) |>
   deactivate()
 
 # To activate items in a nested menu, specify multiple variables
-mn2 <- new_menu(key = c("key1", "key2"),
-                value = list(mn1, mn1))
-mn2 \%>\%
+mn2 <- new_nav_menu(key = c("key1", "key2"),
+                    value = list(mn1, mn1))
+mn2 |>
   activate(key1, band_members)
 
 }
