@@ -3,7 +3,7 @@
 \name{itemise}
 \alias{itemise}
 \alias{itemize}
-\title{Update items}
+\title{Set items}
 \usage{
 itemise(.data, ...)
 
@@ -18,5 +18,5 @@ itemize(.data, ...)
 A \code{navigatr_nav_input} object.
 }
 \description{
-Update items
+Set items
 }

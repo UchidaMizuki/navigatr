@@ -7,7 +7,7 @@
 \alias{deactivate}
 \alias{deactivate.navigatr_nav_menu}
 \alias{deactivate.navigatr_item}
-\title{Activate/deactivate a menu item}
+\title{Activate or deactivate a menu item}
 \usage{
 activate(.data, ..., .add = FALSE)
 

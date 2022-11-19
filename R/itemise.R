@@ -1,4 +1,4 @@
-#' Update items
+#' Set items
 #'
 #' @param .data A `navigatr_nav_input` object.
 #' @param ... Key-value pairs.

@@ -1,4 +1,4 @@
-#' Activate/deactivate a menu item
+#' Activate or deactivate a menu item
 #'
 #' Activates a menu item with the same syntax as [dplyr::pull()].
 #' Activating a menu item allows you to perform operations on the active item.
