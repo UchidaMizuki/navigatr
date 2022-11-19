@@ -20,11 +20,11 @@ be performed while maintaining the overall structure with attributes.
 
 The core functions of this package are as follows,
 
--   `new_nav_menu()` builds a new navigation menu.
-    -   `activate()` accesses a menu item.
--   `new_nav_input()` builds a new input form.
-    -   `itemise()` enters values into the form.
--   `rekey()` and \`rekey_with()\`\` renames the key of a menu item.
+- `new_nav_menu()` builds a new navigation menu.
+  - `activate()` accesses a menu item.
+- `new_nav_input()` builds a new input form.
+  - `itemise()` enters values into the form.
+- `rekey()` and `rekey_with()` renames the key of a menu item.
 
 ## Installation
 
