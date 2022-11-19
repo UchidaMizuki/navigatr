@@ -45,7 +45,8 @@ format_nav <- function(x, path = integer()) {
       symbol <- ifelse(symbol, on, off)
     }
 
-    out <- paste0(symbol, " ", pillar::align(paste0(names(out), ": ")), out)
+    out <- paste0(symbol, " ", pillar::align(paste0(names(out), ": ")), out,
+                  recycle0 = TRUE)
 
     if (!is.null(loc)) {
       path <- path[-1L]
@@ -53,7 +54,8 @@ format_nav <- function(x, path = integer()) {
                         .add = TRUE)
 
       if (is_nav(child)) {
-        out_child <- paste0("  ", format_nav(child, path))
+        out_child <- paste0("  ", format_nav(child, path),
+                            recycle0 = TRUE)
         out <- append(out, out_child, loc)
       }
     }
@@ -62,7 +64,8 @@ format_nav <- function(x, path = integer()) {
     off <- cli::symbol$cross
 
     symbol <- ifelse(purrr::map_lgl(x$value, purrr::negate(is_empty)), on, off)
-    out <- paste0(symbol, " ", pillar::align(paste0(names(out), ": ")), out)
+    out <- paste0(symbol, " ", pillar::align(paste0(names(out), ": ")), out,
+                  recycle0 = TRUE)
   }
   out
 }
