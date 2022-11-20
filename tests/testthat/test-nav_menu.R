@@ -2,6 +2,8 @@ test_that("menu-bands", {
   mn1 <- new_nav_menu(key = c("band_members", "band_instruments"),
                       value = list(dplyr::band_members, dplyr::band_instruments))
   expect_true(is_nav_menu(mn1))
+  expect_output(print(mn1), "band_members")
+  expect_output(print(mn1), "band_instruments")
 
   mn1_1 <- mn1 |>
     activate(band_members)
@@ -26,6 +28,10 @@ test_that("menu-bands", {
   mn2_1 <- mn2 |>
     activate(key1, band_instruments)
   expect_true(is_item(mn2_1))
+  expect_output(print(mn2_1), "key1")
+  expect_output(print(mn2_1), "band_members")
+  expect_output(print(mn2_1), "band_instruments")
+  expect_output(print(mn2_1), "key2")
 })
 
 test_that("menu-vector", {
@@ -87,4 +93,8 @@ test_that("menu-rekey", {
     rekey(new_key3 = key3)
 
   expect_equal(nested_mn$key, c("new_key1", "new_key2", "new_key3"))
+
+  nested_mn <- nested_mn |>
+    rekey_with(~ paste0(.x, "_1"))
+  expect_equal(nested_mn$key, c("new_key1_1", "new_key2_1", "new_key3_1"))
 })

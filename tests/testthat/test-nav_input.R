@@ -5,4 +5,8 @@ test_that("input", {
 
   expect_equal(mn$value[mn$key == "key2"][[1]], letters)
   expect_equal(mn$value[mn$key == "key3"][[1]], LETTERS)
+
+  expect_output(print(mn), "key1")
+  expect_output(print(mn), "key2")
+  expect_output(print(mn), "key3")
 })
