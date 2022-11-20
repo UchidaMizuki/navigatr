@@ -14,9 +14,9 @@ coverage](https://codecov.io/gh/UchidaMizuki/navigatr/branch/main/graph/badge.sv
 
 navigatr provides navigation menus and input forms.
 
-navigatr’s navigation menu allows piped data processing for hierarchical
-data structures. By activating menu items, operations on each item can
-be performed while maintaining the overall structure with attributes.
+the navigation menu allows piped data processing for hierarchical data
+structures. By activating menu items, operations on each item can be
+performed while maintaining the overall structure with attributes.
 
 The core functions of this package are as follows,
 
