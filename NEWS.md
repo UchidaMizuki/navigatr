@@ -1,3 +1,9 @@
+# navigatr 0.2.0
+
+* Add `rekey_with()` to change the menu key name by function.
+* Rename `new_menu()` to `new_nav_menu()`.
+* Add `new_nav_input()` to create input forms.
+
 # navigatr 0.1.2
 
 * Add `itemise()` to update menu items.
@@ -7,7 +13,7 @@
 
 # navigatr 0.1.1
 
-* Adds `rekey()` to rename a key of a menu item.
+* Add `rekey()` to rename a key of a menu item.
 * Fix a bug that menu attributes are not changed properly.
 * Fix a bug that occurs in menus with values other than tibble.
 
