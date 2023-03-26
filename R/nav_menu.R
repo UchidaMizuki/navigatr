@@ -74,6 +74,6 @@ tbl_sum.navigatr_nav_menu <- function(x) {
 }
 
 #' @export
-vec_ptype_abbr.navigatr_nav_menu <- function(x) {
+vec_ptype_abbr.navigatr_nav_menu <- function(x, ...) {
   "nav_menu"
 }

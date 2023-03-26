@@ -37,6 +37,6 @@ tbl_sum.navigatr_nav_input <- function(x) {
 }
 
 #' @export
-vec_ptype_abbr.navigatr_nav_input <- function(x) {
+vec_ptype_abbr.navigatr_nav_input <- function(x, ...) {
   "nav_input"
 }
