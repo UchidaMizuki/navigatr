@@ -1,3 +1,7 @@
+# navigatr 0.2.1
+
+- Fix `vec_ptype_abbr()` methods.
+
 # navigatr 0.2.0
 
 * Add `rekey_with()` to change the menu key name by function.
