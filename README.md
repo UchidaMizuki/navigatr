@@ -52,15 +52,21 @@ library(dplyr)
 
 To build a new navigation menu, give `new_menu()` unique keys and a list
 of their corresponding values. The upper rows show the menu items (keys
-on the left, value summaries on the right). By defining
-`pillar::obj_sum()`, you can change the way the summaries are displayed.
+on the left, value summaries on the right). By `set_nav_description()`,
+you can change the way the value descriptions are displayed (by default,
+the summary from `pillar::obs_sum()` is used).
 
 ``` r
-band <- new_nav_menu(key = c("band_members", "band_instruments"),
-                     value = list(band_members, band_instruments))
+band <- new_nav_menu(
+  key = c("band_members", "band_instruments"),
+  value = list(
+    band_members, 
+    set_nav_description(band_instruments, "A data frame of band instruments")
+  )
+)
 band
 #> # ☐ band_members:     tibble [3 × 2]
-#> # ☐ band_instruments: tibble [3 × 2]
+#> # ☐ band_instruments: A data frame of band instruments
 #> # 
 #> # Please `activate()`.
 ```
@@ -73,14 +79,16 @@ a `navigatr_new_menu` object into an `navigatr_nav_item` object, and
 ``` r
 band <- band |>
   activate(band_members) |>
-  filter(band == "Beatles")
+  filter(
+    band == "Beatles"
+  )
 band
 #> # ☒ band_members:     tibble [2 × 2]
-#> # ☐ band_instruments: tibble [3 × 2]
+#> # ☐ band_instruments: A data frame of band instruments
 #> # 
 #> # A tibble: 2 × 2
 #>   name  band   
-#>   <chr> <chr>  
+#> * <chr> <chr>  
 #> 1 John  Beatles
 #> 2 Paul  Beatles
 ```
@@ -90,7 +98,7 @@ band <- band |>
   deactivate()
 band
 #> # ☐ band_members:     tibble [2 × 2]
-#> # ☐ band_instruments: tibble [3 × 2]
+#> # ☐ band_instruments: A data frame of band instruments
 #> # 
 #> # Please `activate()`.
 ```
@@ -103,11 +111,11 @@ band |>
   activate(band_instruments) |> 
   rekey("new_band_instruments")
 #> # ☐ band_members:         tibble [2 × 2]
-#> # ☒ new_band_instruments: tibble [3 × 2]
+#> # ☒ new_band_instruments: A data frame of band instruments
 #> # 
 #> # A tibble: 3 × 2
 #>   name  plays 
-#>   <chr> <chr> 
+#> * <chr> <chr> 
 #> 1 John  guitar
 #> 2 Paul  bass  
 #> 3 Keith guitar
@@ -117,19 +125,21 @@ You can also build a nested navigation menu. To activate the items,
 specify multiple variables.
 
 ``` r
-bands <- new_nav_menu(key = c("key1", "key2"),
-                      value = list(band, band)) # A list of menu objects
+bands <- new_nav_menu(
+  key = c("key1", "key2"),
+  value = list(band, band) # A list of menu objects
+) 
 bands |> 
   activate(key1, band_instruments) |> 
   select(name)
 #> # ☒ key1: nav_menu [2]
 #> #   ☐ band_members:     tibble [2 × 2]
-#> #   ☒ band_instruments: tibble [3 × 1]
+#> #   ☒ band_instruments: A data frame of band instruments
 #> # ☐ key2: nav_menu [2]
 #> # 
 #> # A tibble: 3 × 1
 #>   name 
-#>   <chr>
+#> * <chr>
 #> 1 John 
 #> 2 Paul 
 #> 3 Keith
@@ -148,8 +158,10 @@ input
 
 ``` r
 input |> 
-  itemise(key1 = "value1",
-          key2 = "value2")
+  itemise(
+    key1 = "value1",
+    key2 = "value2"
+  )
 #> # ✔ key1: chr [1]
 #> # ✔ key2: chr [1]
 #> # 

@@ -23,8 +23,10 @@
 #' @examples
 #' library(dplyr)
 #'
-#' mn1 <- new_nav_menu(key = c("band_members", "band_instruments"),
-#'                     value = list(band_members, band_instruments))
+#' mn1 <- new_nav_menu(
+#'   key = c("band_members", "band_instruments"),
+#'   value = list(band_members, band_instruments)
+#' )
 #'
 #' mn1 |>
 #'   activate(band_members) |>
@@ -39,21 +41,21 @@
 #'   deactivate()
 #'
 #' # To activate items in a nested menu, specify multiple variables
-#' mn2 <- new_nav_menu(key = c("key1", "key2"),
-#'                     value = list(mn1, mn1))
+#' mn2 <- new_nav_menu(
+#'   key = c("key1", "key2"),
+#'   value = list(mn1, mn1)
+#' )
 #' mn2 |>
 #'   activate(key1, band_members)
 #'
 #' @export
-activate <- function(.data, ...,
-                     .add = FALSE) {
+activate <- function(.data, ..., .add = FALSE) {
   UseMethod("activate")
 }
 
 #' @rdname activate
 #' @export
-activate.navigatr_nav_menu <- function(.data, ...,
-                                       .add = FALSE) {
+activate.navigatr_nav_menu <- function(.data, ..., .add = FALSE) {
   vars <- enquos(...)
 
   if (!is_empty(vars)) {
@@ -63,23 +65,21 @@ activate.navigatr_nav_menu <- function(.data, ...,
     # item
     child <- vec_slice(.data, loc)
     x <- child$value[[1]]
-    attrs <- purrr::modify(as.list(child$attrs),
-                           function(x) {
-                             x[[1]]
-                           })
-    tree <- list(key = key[[loc]],
-                 parent = .data,
-                 path = c(item_path(.data), loc),
-                 attr_names = names2(attrs))
-    .data <- item(x,
-                  attrs = attrs,
-                  tree = tree)
+    attrs <- purrr::modify(as.list(child$attrs), function(x) {
+      x[[1]]
+    })
+    tree <- list(
+      key = key[[loc]],
+      parent = .data,
+      path = c(item_path(.data), loc),
+      attr_names = names2(attrs)
+    )
+    .data <- item(x, attrs = attrs, tree = tree)
 
     # activate recursively
     vars <- vars[-1]
     if (!is_empty(vars)) {
-      .data <- activate(.data, !!!vars,
-                        .add = TRUE)
+      .data <- activate(.data, !!!vars, .add = TRUE)
     }
   }
   .data
@@ -87,8 +87,7 @@ activate.navigatr_nav_menu <- function(.data, ...,
 
 #' @rdname activate
 #' @export
-activate.navigatr_item <- function(.data, ...,
-                                   .add = FALSE) {
+activate.navigatr_item <- function(.data, ..., .add = FALSE) {
   if (!.add) {
     .data <- deactivate(.data)
   }
@@ -102,22 +101,19 @@ activate.navigatr_item <- function(.data, ...,
 
 #' @rdname activate
 #' @export
-deactivate <- function(x, ...,
-                       deep = TRUE) {
+deactivate <- function(x, ..., deep = TRUE) {
   UseMethod("deactivate")
 }
 
 #' @rdname activate
 #' @export
-deactivate.navigatr_nav_menu <- function(x, ...,
-                                         deep = TRUE) {
+deactivate.navigatr_nav_menu <- function(x, ..., deep = TRUE) {
   x
 }
 
 #' @rdname activate
 #' @export
-deactivate.navigatr_item <- function(x, ...,
-                                     deep = TRUE) {
+deactivate.navigatr_item <- function(x, ..., deep = TRUE) {
   key <- item_key(x)
   parent <- item_parent(x)
   path <- item_path(x)
@@ -125,9 +121,7 @@ deactivate.navigatr_item <- function(x, ...,
 
   loc <- path[[vec_size(path)]]
 
-  stopifnot(
-    !key %in% parent$key[-loc]
-  )
+  stopifnot(!key %in% parent$key[-loc])
 
   parent$key[[loc]] <- key
   parent$value[[loc]] <- unitem(x)

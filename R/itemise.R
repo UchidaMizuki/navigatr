@@ -7,21 +7,21 @@
 #'
 #' @export
 itemise <- function(.data, ...) {
-  args <- dots_list(...,
-                    .named = TRUE,
-                    .homonyms = "first")
+  args <- dots_list(..., .named = TRUE, .homonyms = "first")
   nms <- names(args)
   args <- unname(args)
 
   keys <- .data$key
-  stopifnot(
-    nms %in% keys
-  )
+  stopifnot(nms %in% keys)
 
   locs <- vec_match(nms, keys)
 
   for (i in vec_seq_along(locs)) {
+    description <- nav_description(.data$value[[locs[[i]]]]) %||%
+      nav_description(args[[i]])
+
     .data$value[[locs[[i]]]] <- vec_cast(args[[i]], .data$value[[locs[[i]]]])
+    nav_description(.data$value[[locs[[i]]]]) <- description
   }
   .data
 }

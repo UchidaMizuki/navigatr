@@ -1,9 +1,12 @@
 #' Build a new input form
 #'
-#' To create a new input form, give `new_nav_input()` a unique key and the corresponding list of values.
+#' To create a new input form, give `new_nav_input()` a unique key and the
+#' corresponding list of values.
 #' By default, the values are empty characters.
-#' Each line shows the menu items (keys on the left, value summaries on the right).
-#' The summaries are [pillar::obj_sum] outputs, so you can change the printing methods.
+#' Each line shows the menu items (keys on the left, value descriptions on the
+#' right).
+#' By default, the description from [pillar::obj_sum()] is displayed, but you
+#' can set the description using `set_nav_description()`.
 #' Each menu item can be changed by [itemise()].
 #'
 #' @param key A unique character vector.
@@ -16,12 +19,13 @@
 #' @seealso [itemise()]
 #'
 #' @export
-new_nav_input <- function(key = character(),
-                          value = list(character()), ...,
-                          class = character()) {
-  new_nav(key = key,
-          value = value, ...,
-          class = c(class, "navigatr_nav_input"))
+new_nav_input <- function(
+  key = character(),
+  value = list(character()),
+  ...,
+  class = character()
+) {
+  new_nav(key = key, value = value, ..., class = c(class, "navigatr_nav_input"))
 }
 
 is_nav_input <- function(x) {
@@ -30,8 +34,9 @@ is_nav_input <- function(x) {
 
 #' @export
 tbl_sum.navigatr_nav_input <- function(x) {
-  out <- purrr::map_chr(x$value,
-                        pillar::obj_sum)
+  out <- purrr::map_chr(x$value, function(value) {
+    nav_description(value) %||% pillar::obj_sum(value)
+  })
   names(out) <- x$key
   out
 }

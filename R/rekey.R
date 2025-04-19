@@ -39,11 +39,8 @@ rekey.navigatr_item <- function(.data, ...) {
 
 #' @rdname rekey
 #' @export
-rekey_with <- function(.data, .fn,
-                       .keys = tidyselect::everything(), ...) {
-  stopifnot(
-    is_nav(.data)
-  )
+rekey_with <- function(.data, .fn, .keys = tidyselect::everything(), ...) {
+  stopifnot(is_nav(.data))
 
   .fn <- as_function(.fn)
 
@@ -51,8 +48,7 @@ rekey_with <- function(.data, .fn,
   cols <- tidyselect::eval_select(enquo(.keys), keys)
 
   keys[cols] <- .fn(keys[cols], ...)
-  keys <- vec_as_names(keys,
-                       repair = "check_unique")
+  keys <- vec_as_names(keys, repair = "check_unique")
   .data$key <- unname(keys)
   .data
 }

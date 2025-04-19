@@ -28,21 +28,28 @@ When an item becomes active, the attrs will be added to its attributes.}
 A \code{navigatr_nav_menu} object, a subclass of class \code{data.frame}.
 }
 \description{
-To build a new menu, give \code{new_nav_menu()} unique keys and a list of their corresponding values.
-Each line shows the menu items (keys on the left, value summaries on the right).
-The summaries are \link[pillar:type_sum]{pillar::obj_sum} outputs, so you can change the printing methods.
+To build a new menu, give \code{new_nav_menu()} unique keys and a list of their
+corresponding values.
+Each line shows the menu items (keys on the left, value descriptions on the
+right).
+By default, the description from \code{\link[pillar:type_sum]{pillar::obj_sum()}} is displayed, but you
+can set the description using \code{set_nav_description()}.
 Each menu item can be accessed by \code{\link[=activate]{activate()}}.
 }
 \examples{
 library(dplyr)
 
-band <- new_nav_menu(key = c("band_members", "band_instruments"),
-                     value = list(band_members, band_instruments))
+band <- new_nav_menu(
+  key = c("band_members", "band_instruments"),
+  value = list(band_members, band_instruments)
+)
 band
 
 # You can also build a nested menu
-bands <- new_nav_menu(key = c("key1", "key2"),
-                      value = list(band, band))
+bands <- new_nav_menu(
+  key = c("key1", "key2"),
+  value = list(band, band)
+)
 bands
 
 }

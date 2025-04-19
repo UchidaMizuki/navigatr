@@ -1,7 +1,10 @@
-new_nav <- function(key = character(),
-                    value = list(list()),
-                    attrs = data_frame(.size = 1L), ...,
-                    class = character()) {
+new_nav <- function(
+  key = character(),
+  value = list(list()),
+  attrs = data_frame(.size = 1L),
+  ...,
+  class = character()
+) {
   key <- vec_cast(key, character())
 
   if (vec_duplicate_any(key)) {
@@ -12,11 +15,16 @@ new_nav <- function(key = character(),
     abort("`value` must be a list.")
   }
 
-  new_data_frame(df_list(key = key,
-                         value = value,
-                         attrs = attrs %||% data_frame(.size = 1L),
-                         .size = vec_size(key)), ...,
-                 class = c(class, "navigatr_nav"))
+  new_data_frame(
+    df_list(
+      key = key,
+      value = value,
+      attrs = attrs %||% data_frame(.size = 1L),
+      .size = vec_size(key)
+    ),
+    ...,
+    class = c(class, "navigatr_nav")
+  )
 }
 
 is_nav <- function(x) {
@@ -40,22 +48,24 @@ format_nav <- function(x, path = integer()) {
       symbol <- off
     } else {
       loc <- path[[1L]]
-      symbol <- vec_equal(vec_seq_along(x), loc,
-                          na_equal = TRUE)
+      symbol <- vec_equal(vec_seq_along(x), loc, na_equal = TRUE)
       symbol <- ifelse(symbol, on, off)
     }
 
-    out <- paste0(symbol, " ", pillar::align(paste0(names(out), ": ")), out,
-                  recycle0 = TRUE)
+    out <- paste0(
+      symbol,
+      " ",
+      pillar::align(paste0(names(out), ": ")),
+      out,
+      recycle0 = TRUE
+    )
 
     if (!is.null(loc)) {
       path <- path[-1L]
-      child <- activate(x, loc,
-                        .add = TRUE)
+      child <- activate(x, loc, .add = TRUE)
 
       if (is_nav(child)) {
-        out_child <- paste0("  ", format_nav(child, path),
-                            recycle0 = TRUE)
+        out_child <- paste0("  ", format_nav(child, path), recycle0 = TRUE)
         out <- append(out, out_child, loc)
       }
     }
@@ -64,8 +74,13 @@ format_nav <- function(x, path = integer()) {
     off <- cli::symbol$cross
 
     symbol <- ifelse(purrr::map_lgl(x$value, purrr::negate(is_empty)), on, off)
-    out <- paste0(symbol, " ", pillar::align(paste0(names(out), ": ")), out,
-                  recycle0 = TRUE)
+    out <- paste0(
+      symbol,
+      " ",
+      pillar::align(paste0(names(out), ": ")),
+      out,
+      recycle0 = TRUE
+    )
   }
   out
 }

@@ -24,10 +24,13 @@ new_nav_input(
 A \code{navigatr_nav_input} object, a subclass of class \code{data.frame}.
 }
 \description{
-To create a new input form, give \code{new_nav_input()} a unique key and the corresponding list of values.
+To create a new input form, give \code{new_nav_input()} a unique key and the
+corresponding list of values.
 By default, the values are empty characters.
-Each line shows the menu items (keys on the left, value summaries on the right).
-The summaries are \link[pillar:type_sum]{pillar::obj_sum} outputs, so you can change the printing methods.
+Each line shows the menu items (keys on the left, value descriptions on the
+right).
+By default, the description from \code{\link[pillar:type_sum]{pillar::obj_sum()}} is displayed, but you
+can set the description using \code{set_nav_description()}.
 Each menu item can be changed by \code{\link[=itemise]{itemise()}}.
 }
 \seealso{
