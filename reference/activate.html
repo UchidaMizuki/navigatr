@@ -113,8 +113,10 @@ In <code>deactivate()</code>, A <code>navigatr_nav_menu</code> object.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">mn1</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_nav_menu.html">new_nav_menu</a></span><span class="op">(</span>key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"band_members"</span>, <span class="st">"band_instruments"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                    value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">band_members</span>, <span class="va">band_instruments</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mn1</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_nav_menu.html">new_nav_menu</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"band_members"</span>, <span class="st">"band_instruments"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">band_members</span>, <span class="va">band_instruments</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mn1</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">activate</span><span class="op">(</span><span class="va">band_members</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
@@ -150,8 +152,10 @@ In <code>deactivate()</code>, A <code>navigatr_nav_menu</code> object.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Please `activate()`.</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To activate items in a nested menu, specify multiple variables</span></span></span>
-<span class="r-in"><span><span class="va">mn2</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_nav_menu.html">new_nav_menu</a></span><span class="op">(</span>key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"key1"</span>, <span class="st">"key2"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                    value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">mn1</span>, <span class="va">mn1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mn2</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_nav_menu.html">new_nav_menu</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"key1"</span>, <span class="st">"key2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">mn1</span>, <span class="va">mn1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mn2</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">activate</span><span class="op">(</span><span class="va">key1</span>, <span class="va">band_members</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ☒ key1: nav_menu [2]</span></span>
