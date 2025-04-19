@@ -31,7 +31,9 @@ is_nav_input <- function(x) {
 
 #' @export
 tbl_sum.navigatr_nav_input <- function(x) {
-  out <- purrr::map_chr(x$value, pillar::obj_sum)
+  out <- purrr::map_chr(x$value, function(value) {
+    nav_description(value) %||% pillar::obj_sum(value)
+  })
   names(out) <- x$key
   out
 }

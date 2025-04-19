@@ -30,7 +30,7 @@ A \code{navigatr_nav_menu} object, a subclass of class \code{data.frame}.
 \description{
 To build a new menu, give \code{new_nav_menu()} unique keys and a list of their corresponding values.
 Each line shows the menu items (keys on the left, value summaries on the right).
-The summaries are \link[pillar:type_sum]{pillar::obj_sum} outputs, so you can change the printing methods.
+The summaries are \code{\link[pillar:type_sum]{pillar::obj_sum()}} outputs, so you can change the printing methods.
 Each menu item can be accessed by \code{\link[=activate]{activate()}}.
 }
 \examples{

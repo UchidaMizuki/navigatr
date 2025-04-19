@@ -17,7 +17,11 @@ itemise <- function(.data, ...) {
   locs <- vec_match(nms, keys)
 
   for (i in vec_seq_along(locs)) {
+    description <- nav_description(.data$value[[locs[[i]]]]) %||%
+      nav_description(args[[i]])
+
     .data$value[[locs[[i]]]] <- vec_cast(args[[i]], .data$value[[locs[[i]]]])
+    nav_description(.data$value[[locs[[i]]]]) <- description
   }
   .data
 }

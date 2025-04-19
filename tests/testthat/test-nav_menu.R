@@ -1,6 +1,14 @@
 test_that("menu-bands", {
-  mn1 <- new_nav_menu(key = c("band_members", "band_instruments"),
-                      value = list(dplyr::band_members, dplyr::band_instruments))
+  description_band_members <- "A data frame of band members"
+  description_band_instruments <- "A data frame of band instruments"
+
+  mn1 <- new_nav_menu(
+    key = c("band_members", "band_instruments"),
+    value = list(
+      set_nav_description(dplyr::band_members, description_band_members),
+      set_nav_description(dplyr::band_instruments, description_band_instruments)
+    )
+  )
   expect_true(is_nav_menu(mn1))
   expect_output(print(mn1), "band_members")
   expect_output(print(mn1), "band_instruments")
@@ -8,6 +16,7 @@ test_that("menu-bands", {
   mn1_1 <- mn1 |>
     activate(band_members)
   expect_true(is_item(mn1_1))
+  expect_equal(nav_description(mn1_1), description_band_members)
 
   mn1_2 <- mn1_1 |>
     dplyr::filter(band == "Beatles")
@@ -15,14 +24,14 @@ test_that("menu-bands", {
     deactivate() |>
     activate(band_members)
   expect_equal(nrow(mn1_2), nrow(mn1_3))
+  expect_equal(nav_description(mn1_3), description_band_members)
 
   expect_error({
     mn1 |>
       activate(band_members, 1)
   })
 
-  mn2 <- new_nav_menu(key = c("key1", "key2"),
-                      value = list(mn1, mn1))
+  mn2 <- new_nav_menu(key = c("key1", "key2"), value = list(mn1, mn1))
   expect_true(is_nav_menu(mn2))
 
   mn2_1 <- mn2 |>
@@ -49,9 +58,11 @@ test_that("menu-vector", {
 })
 
 test_that("menu-attrs", {
-  mn <- new_nav_menu(as.character(1:3), 1:3,
-                     attrs = data_frame(col1 = 1:3,
-                                        col2 = list(1, 2, 3)))
+  mn <- new_nav_menu(
+    as.character(1:3),
+    1:3,
+    attrs = data_frame(col1 = 1:3, col2 = list(1, 2, 3))
+  )
   expect_true(is_nav_menu(mn))
 
   mn_1 <- mn |>
@@ -70,9 +81,11 @@ test_that("menu-attrs", {
 })
 
 test_that("menu-rekey", {
-  mn <- new_nav_menu(c("key1", "key2", "key3"), 1:3,
-                     attrs = data_frame(col1 = 1:3,
-                                        col2 = list(1, 2, 3)))
+  mn <- new_nav_menu(
+    c("key1", "key2", "key3"),
+    1:3,
+    attrs = data_frame(col1 = 1:3, col2 = list(1, 2, 3))
+  )
   mn <- mn |>
     activate(key1) |>
     rekey("new_key1") |>
@@ -80,8 +93,7 @@ test_that("menu-rekey", {
 
   expect_equal(mn$key, c("new_key1", "key2", "key3"))
 
-  nested_mn <- new_nav_menu(c("key1", "key2"),
-                            list(mn, mn))
+  nested_mn <- new_nav_menu(c("key1", "key2"), list(mn, mn))
   nested_mn <- nested_mn |>
     activate(key1, key2) |>
     rekey("new_key2") |>

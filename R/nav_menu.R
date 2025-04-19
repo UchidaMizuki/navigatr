@@ -2,7 +2,7 @@
 #'
 #' To build a new menu, give `new_nav_menu()` unique keys and a list of their corresponding values.
 #' Each line shows the menu items (keys on the left, value summaries on the right).
-#' The summaries are [pillar::obj_sum] outputs, so you can change the printing methods.
+#' The summaries are [pillar::obj_sum()] outputs, so you can change the printing methods.
 #' Each menu item can be accessed by [activate()].
 #'
 #' @param key A unique character vector.
@@ -46,6 +46,7 @@ new_nav_menu <- function(
         attr(x, "sticky_attrs") <- c(
           names(attrs),
           "navigatr_tree",
+          "navigatr_description",
           attr(x, "sticky_attrs")
         )
         attr(x, "class_grouped_df") <- c(
@@ -59,7 +60,7 @@ new_nav_menu <- function(
       } else {
         x <- stickyr::new_sticky_tibble(
           x,
-          attrs = c(names(attrs), "navigatr_tree"),
+          attrs = c(names(attrs), "navigatr_tree", "navigatr_description"),
           class_grouped_df = "navigatr_item",
           class_rowwise_df = "navigatr_item"
         )
@@ -86,7 +87,9 @@ tbl_sum.navigatr_nav_menu <- function(x) {
   key <- x$key
   out <- purrr::map_chr(key, function(key) {
     child <- activate(x, key, .add = TRUE)
-    pillar::obj_sum(unitem(child, remove_attrs = FALSE))
+    child <- unitem(child, remove_attrs = FALSE)
+
+    nav_description(child) %||% pillar::obj_sum(child)
   })
   names(out) <- key
   out
