@@ -1,8 +1,11 @@
 #' Build a new menu
 #'
-#' To build a new menu, give `new_nav_menu()` unique keys and a list of their corresponding values.
-#' Each line shows the menu items (keys on the left, value summaries on the right).
-#' The summaries are [pillar::obj_sum()] outputs, so you can change the printing methods.
+#' To build a new menu, give `new_nav_menu()` unique keys and a list of their
+#' corresponding values.
+#' Each line shows the menu items (keys on the left, value descriptions on the
+#' right).
+#' By default, the description from [pillar::obj_sum()] is displayed, but you
+#' can set the description using `set_nav_description()`.
 #' Each menu item can be accessed by [activate()].
 #'
 #' @param key A unique character vector.

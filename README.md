@@ -52,17 +52,21 @@ library(dplyr)
 
 To build a new navigation menu, give `new_menu()` unique keys and a list
 of their corresponding values. The upper rows show the menu items (keys
-on the left, value summaries on the right). By defining
-`pillar::obj_sum()`, you can change the way the summaries are displayed.
+on the left, value summaries on the right). By `set_nav_description()`,
+you can change the way the value descriptions are displayed (by default,
+the summary from `pillar::obs_sum()` is used).
 
 ``` r
 band <- new_nav_menu(
   key = c("band_members", "band_instruments"),
-  value = list(band_members, band_instruments)
+  value = list(
+    band_members, 
+    set_nav_description(band_instruments, "A data frame of band instruments")
+  )
 )
 band
 #> # ☐ band_members:     tibble [3 × 2]
-#> # ☐ band_instruments: tibble [3 × 2]
+#> # ☐ band_instruments: A data frame of band instruments
 #> # 
 #> # Please `activate()`.
 ```
@@ -80,7 +84,7 @@ band <- band |>
   )
 band
 #> # ☒ band_members:     tibble [2 × 2]
-#> # ☐ band_instruments: tibble [3 × 2]
+#> # ☐ band_instruments: A data frame of band instruments
 #> # 
 #> # A tibble: 2 × 2
 #>   name  band   
@@ -94,7 +98,7 @@ band <- band |>
   deactivate()
 band
 #> # ☐ band_members:     tibble [2 × 2]
-#> # ☐ band_instruments: tibble [3 × 2]
+#> # ☐ band_instruments: A data frame of band instruments
 #> # 
 #> # Please `activate()`.
 ```
@@ -107,7 +111,7 @@ band |>
   activate(band_instruments) |> 
   rekey("new_band_instruments")
 #> # ☐ band_members:         tibble [2 × 2]
-#> # ☒ new_band_instruments: tibble [3 × 2]
+#> # ☒ new_band_instruments: A data frame of band instruments
 #> # 
 #> # A tibble: 3 × 2
 #>   name  plays 
@@ -130,7 +134,7 @@ bands |>
   select(name)
 #> # ☒ key1: nav_menu [2]
 #> #   ☐ band_members:     tibble [2 × 2]
-#> #   ☒ band_instruments: tibble [3 × 1]
+#> #   ☒ band_instruments: A data frame of band instruments
 #> # ☐ key2: nav_menu [2]
 #> # 
 #> # A tibble: 3 × 1

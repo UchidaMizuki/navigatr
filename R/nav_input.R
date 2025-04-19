@@ -1,9 +1,12 @@
 #' Build a new input form
 #'
-#' To create a new input form, give `new_nav_input()` a unique key and the corresponding list of values.
+#' To create a new input form, give `new_nav_input()` a unique key and the
+#' corresponding list of values.
 #' By default, the values are empty characters.
-#' Each line shows the menu items (keys on the left, value summaries on the right).
-#' The summaries are [pillar::obj_sum] outputs, so you can change the printing methods.
+#' Each line shows the menu items (keys on the left, value descriptions on the
+#' right).
+#' By default, the description from [pillar::obj_sum()] is displayed, but you
+#' can set the description using `set_nav_description()`.
 #' Each menu item can be changed by [itemise()].
 #'
 #' @param key A unique character vector.
