@@ -7,16 +7,12 @@
 #'
 #' @export
 itemise <- function(.data, ...) {
-  args <- dots_list(...,
-                    .named = TRUE,
-                    .homonyms = "first")
+  args <- dots_list(..., .named = TRUE, .homonyms = "first")
   nms <- names(args)
   args <- unname(args)
 
   keys <- .data$key
-  stopifnot(
-    nms %in% keys
-  )
+  stopifnot(nms %in% keys)
 
   locs <- vec_match(nms, keys)
 

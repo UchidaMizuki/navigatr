@@ -1,11 +1,14 @@
 item <- function(x, attrs, tree) {
-  exec(structure, x, !!!attrs,
-       navigatr_tree = tree,
-       class = c("navigatr_item", class(x)))
+  exec(
+    structure,
+    x,
+    !!!attrs,
+    navigatr_tree = tree,
+    class = c("navigatr_item", class(x))
+  )
 }
 
-unitem <- function(x,
-                   remove_attrs = TRUE) {
+unitem <- function(x, remove_attrs = TRUE) {
   if (remove_attrs) {
     for (attr_name in item_attr_names(x)) {
       attr(x, attr_name) <- NULL

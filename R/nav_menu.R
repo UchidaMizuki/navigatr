@@ -29,31 +29,48 @@
 #' bands
 #'
 #' @export
-new_nav_menu <- function(key = character(),
-                         value = list(data.frame()),
-                         attrs = NULL, ...,
-                         class = character()) {
-  value <- purrr::map(value,
-                      function(x) {
-                        if (is.data.frame(x) && !is_nav(x)) {
-                          if (stickyr::is_sticky_tibble(x)) {
-                            attr(x, "sticky_attrs") <- c(names(attrs), "navigatr_tree", attr(x, "sticky_attrs"))
-                            attr(x, "class_grouped_df") <- c("navigatr_item", attr(x, "class_grouped_df"))
-                            attr(x, "class_rowwise_df") <- c("navigatr_item", attr(x, "class_rowwise_df"))
-                          } else {
-                            x <- stickyr::new_sticky_tibble(x,
-                                                            attrs = c(names(attrs), "navigatr_tree"),
-                                                            class_grouped_df = "navigatr_item",
-                                                            class_rowwise_df = "navigatr_item")
-                          }
-                        }
-                        x
-                      })
+new_nav_menu <- function(
+  key = character(),
+  value = list(data.frame()),
+  attrs = NULL,
+  ...,
+  class = character()
+) {
+  value <- purrr::map(value, function(x) {
+    if (is.data.frame(x) && !is_nav(x)) {
+      if (stickyr::is_sticky_tibble(x)) {
+        attr(x, "sticky_attrs") <- c(
+          names(attrs),
+          "navigatr_tree",
+          attr(x, "sticky_attrs")
+        )
+        attr(x, "class_grouped_df") <- c(
+          "navigatr_item",
+          attr(x, "class_grouped_df")
+        )
+        attr(x, "class_rowwise_df") <- c(
+          "navigatr_item",
+          attr(x, "class_rowwise_df")
+        )
+      } else {
+        x <- stickyr::new_sticky_tibble(
+          x,
+          attrs = c(names(attrs), "navigatr_tree"),
+          class_grouped_df = "navigatr_item",
+          class_rowwise_df = "navigatr_item"
+        )
+      }
+    }
+    x
+  })
 
-  new_nav(key = key,
-          value = value,
-          attrs = attrs, ...,
-          class = c(class, "navigatr_nav_menu"))
+  new_nav(
+    key = key,
+    value = value,
+    attrs = attrs,
+    ...,
+    class = c(class, "navigatr_nav_menu")
+  )
 }
 
 is_nav_menu <- function(x) {
@@ -63,12 +80,10 @@ is_nav_menu <- function(x) {
 #' @export
 tbl_sum.navigatr_nav_menu <- function(x) {
   key <- x$key
-  out <- purrr::map_chr(key,
-                        function(key) {
-                          child <- activate(x, key,
-                                            .add = TRUE)
-                          pillar::obj_sum(unitem(child, remove_attrs = FALSE))
-                        })
+  out <- purrr::map_chr(key, function(key) {
+    child <- activate(x, key, .add = TRUE)
+    pillar::obj_sum(unitem(child, remove_attrs = FALSE))
+  })
   names(out) <- key
   out
 }

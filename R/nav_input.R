@@ -16,12 +16,13 @@
 #' @seealso [itemise()]
 #'
 #' @export
-new_nav_input <- function(key = character(),
-                          value = list(character()), ...,
-                          class = character()) {
-  new_nav(key = key,
-          value = value, ...,
-          class = c(class, "navigatr_nav_input"))
+new_nav_input <- function(
+  key = character(),
+  value = list(character()),
+  ...,
+  class = character()
+) {
+  new_nav(key = key, value = value, ..., class = c(class, "navigatr_nav_input"))
 }
 
 is_nav_input <- function(x) {
@@ -30,8 +31,7 @@ is_nav_input <- function(x) {
 
 #' @export
 tbl_sum.navigatr_nav_input <- function(x) {
-  out <- purrr::map_chr(x$value,
-                        pillar::obj_sum)
+  out <- purrr::map_chr(x$value, pillar::obj_sum)
   names(out) <- x$key
   out
 }
