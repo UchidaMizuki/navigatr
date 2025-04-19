@@ -23,8 +23,10 @@
 #' @examples
 #' library(dplyr)
 #'
-#' mn1 <- new_nav_menu(key = c("band_members", "band_instruments"),
-#'                     value = list(band_members, band_instruments))
+#' mn1 <- new_nav_menu(
+#'   key = c("band_members", "band_instruments"),
+#'   value = list(band_members, band_instruments)
+#' )
 #'
 #' mn1 |>
 #'   activate(band_members) |>
@@ -39,8 +41,10 @@
 #'   deactivate()
 #'
 #' # To activate items in a nested menu, specify multiple variables
-#' mn2 <- new_nav_menu(key = c("key1", "key2"),
-#'                     value = list(mn1, mn1))
+#' mn2 <- new_nav_menu(
+#'   key = c("key1", "key2"),
+#'   value = list(mn1, mn1)
+#' )
 #' mn2 |>
 #'   activate(key1, band_members)
 #'

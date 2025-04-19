@@ -19,13 +19,17 @@
 #' @examples
 #' library(dplyr)
 #'
-#' band <- new_nav_menu(key = c("band_members", "band_instruments"),
-#'                      value = list(band_members, band_instruments))
+#' band <- new_nav_menu(
+#'   key = c("band_members", "band_instruments"),
+#'   value = list(band_members, band_instruments)
+#' )
 #' band
 #'
 #' # You can also build a nested menu
-#' bands <- new_nav_menu(key = c("key1", "key2"),
-#'                       value = list(band, band))
+#' bands <- new_nav_menu(
+#'   key = c("key1", "key2"),
+#'   value = list(band, band)
+#' )
 #' bands
 #'
 #' @export
