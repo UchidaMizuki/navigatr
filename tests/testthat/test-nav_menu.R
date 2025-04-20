@@ -1,13 +1,14 @@
 test_that("menu-bands", {
-  description_band_members <- "A data frame of band members"
-  description_band_instruments <- "A data frame of band instruments"
-
   mn1 <- new_nav_menu(
     key = c("band_members", "band_instruments"),
     value = list(
-      set_nav_description(dplyr::band_members, description_band_members),
-      set_nav_description(dplyr::band_instruments, description_band_instruments)
-    )
+      dplyr::band_members,
+      dplyr::band_instruments
+    ),
+    description = c(
+      "A data frame of band members",
+      "A data frame of band instruments"
+    ),
   )
   expect_true(is_nav_menu(mn1))
   expect_output(print(mn1), "band_members")
@@ -16,7 +17,6 @@ test_that("menu-bands", {
   mn1_1 <- mn1 |>
     activate(band_members)
   expect_true(is_item(mn1_1))
-  expect_equal(nav_description(mn1_1), description_band_members)
 
   mn1_2 <- mn1_1 |>
     dplyr::filter(band == "Beatles")
@@ -24,7 +24,6 @@ test_that("menu-bands", {
     deactivate() |>
     activate(band_members)
   expect_equal(nrow(mn1_2), nrow(mn1_3))
-  expect_equal(nav_description(mn1_3), description_band_members)
 
   expect_error({
     mn1 |>
