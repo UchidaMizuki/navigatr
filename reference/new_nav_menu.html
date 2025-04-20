@@ -4,13 +4,13 @@ corresponding values.
 Each line shows the menu items (keys on the left, value descriptions on the
 right).
 By default, the description from pillar::obj_sum() is displayed, but you
-can set the description using set_nav_description().
+can set description.
 Each menu item can be accessed by activate()."><meta property="og:description" content="To build a new menu, give new_nav_menu() unique keys and a list of their
 corresponding values.
 Each line shows the menu items (keys on the left, value descriptions on the
 right).
 By default, the description from pillar::obj_sum() is displayed, but you
-can set the description using set_nav_description().
+can set description.
 Each menu item can be accessed by activate()."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
@@ -51,7 +51,7 @@ corresponding values.
 Each line shows the menu items (keys on the left, value descriptions on the
 right).
 By default, the description from <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">pillar::obj_sum()</a></code> is displayed, but you
-can set the description using <code><a href="nav_description.html">set_nav_description()</a></code>.
+can set <code>description</code>.
 Each menu item can be accessed by <code><a href="activate.html">activate()</a></code>.</p>
     </div>
 
@@ -60,6 +60,7 @@ Each menu item can be accessed by <code><a href="activate.html">activate()</a></
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_nav_menu</span><span class="op">(</span></span>
 <span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  description <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  attrs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -78,8 +79,14 @@ Each menu item can be accessed by <code><a href="activate.html">activate()</a></
 <dd><p>A list of values corresponding to the keys.</p></dd>
 
 
+<dt id="arg-description">description<a class="anchor" aria-label="anchor" href="#arg-description"></a></dt>
+<dd><p>A character vector of descriptions for the keys. By
+default, the description from <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">pillar::obj_sum()</a></code> is displayed.</p></dd>
+
+
 <dt id="arg-attrs">attrs<a class="anchor" aria-label="anchor" href="#arg-attrs"></a></dt>
-<dd><p>A data frame for additional attributes of items (an empty data frame by default).
+<dd><p>A data frame for additional attributes of items (an empty data
+frame by default).
 When an item becomes active, the attrs will be added to its attributes.</p></dd>
 
 
@@ -106,11 +113,15 @@ When an item becomes active, the attrs will be added to its attributes.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">band</span> <span class="op">&lt;-</span> <span class="fu">new_nav_menu</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"band_members"</span>, <span class="st">"band_instruments"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">band_members</span>, <span class="va">band_instruments</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">band_members</span>, <span class="va">band_instruments</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  description <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"A data frame of band members"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"A data frame of band instruments"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">band</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ☐ band_members:     tibble [3 × 2]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ☐ band_instruments: tibble [3 × 2]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ☐ band_members:     A data frame of band members</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ☐ band_instruments: A data frame of band instruments</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Please `activate()`.</span></span>
 <span class="r-in"><span></span></span>

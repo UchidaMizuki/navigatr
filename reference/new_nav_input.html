@@ -5,14 +5,14 @@ By default, the values are empty characters.
 Each line shows the menu items (keys on the left, value descriptions on the
 right).
 By default, the description from pillar::obj_sum() is displayed, but you
-can set the description using set_nav_description().
+can set description.
 Each menu item can be changed by itemise()."><meta property="og:description" content="To create a new input form, give new_nav_input() a unique key and the
 corresponding list of values.
 By default, the values are empty characters.
 Each line shows the menu items (keys on the left, value descriptions on the
 right).
 By default, the description from pillar::obj_sum() is displayed, but you
-can set the description using set_nav_description().
+can set description.
 Each menu item can be changed by itemise()."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
@@ -54,7 +54,7 @@ By default, the values are empty characters.
 Each line shows the menu items (keys on the left, value descriptions on the
 right).
 By default, the description from <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">pillar::obj_sum()</a></code> is displayed, but you
-can set the description using <code><a href="nav_description.html">set_nav_description()</a></code>.
+can set <code>description</code>.
 Each menu item can be changed by <code><a href="itemise.html">itemise()</a></code>.</p>
     </div>
 
@@ -63,6 +63,7 @@ Each menu item can be changed by <code><a href="itemise.html">itemise()</a></cod
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_nav_input</span><span class="op">(</span></span>
 <span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  description <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -77,7 +78,13 @@ Each menu item can be changed by <code><a href="itemise.html">itemise()</a></cod
 
 
 <dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
-<dd><p>A list of values corresponding to the keys. By default, the values are empty characters.</p></dd>
+<dd><p>A list of values corresponding to the keys. By default, the
+values are empty characters.</p></dd>
+
+
+<dt id="arg-description">description<a class="anchor" aria-label="anchor" href="#arg-description"></a></dt>
+<dd><p>A character vector of descriptions for the keys. By
+default, the description from <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">pillar::obj_sum()</a></code> is displayed.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -85,7 +92,8 @@ Each menu item can be changed by <code><a href="itemise.html">itemise()</a></cod
 
 
 <dt id="arg-class">class<a class="anchor" aria-label="anchor" href="#arg-class"></a></dt>
-<dd><p>A character vector of subclasses passed to <code><a href="https://vctrs.r-lib.org/reference/new_data_frame.html" class="external-link">vctrs::new_data_frame()</a></code>.</p></dd>
+<dd><p>A character vector of subclasses passed to
+<code><a href="https://vctrs.r-lib.org/reference/new_data_frame.html" class="external-link">vctrs::new_data_frame()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -92,17 +92,21 @@
 <div class="section level3">
 <h3 id="build-a-navigation-menu">Build a navigation menu<a class="anchor" aria-label="anchor" href="#build-a-navigation-menu"></a>
 </h3>
-<p>To build a new navigation menu, give <code><a href="reference/new_menu.html">new_menu()</a></code> unique keys and a list of their corresponding values. The upper rows show the menu items (keys on the left, value summaries on the right). By <code><a href="reference/nav_description.html">set_nav_description()</a></code>, you can change the way the value descriptions are displayed (by default, the summary from <code>pillar::obs_sum()</code> is used).</p>
+<p>To create a new navigation menu, give <code><a href="reference/new_menu.html">new_menu()</a></code> unique keys and a list of their corresponding values. The top rows show the menu items (keys on the left, value summaries on the right). The <code>description</code> argument allows you to add descriptions to the menu items (optional).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">band</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/new_nav_menu.html">new_nav_menu</a></span><span class="op">(</span></span>
 <span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"band_members"</span>, <span class="st">"band_instruments"</span><span class="op">)</span>,</span>
 <span>  value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    <span class="va">band_members</span>, </span>
-<span>    <span class="fu"><a href="reference/nav_description.html">set_nav_description</a></span><span class="op">(</span><span class="va">band_instruments</span>, <span class="st">"A data frame of band instruments"</span><span class="op">)</span></span>
+<span>    <span class="va">band_instruments</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  description <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"A data frame of band members"</span>,</span>
+<span>    <span class="st">"A data frame of band instruments"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">band</span></span>
-<span><span class="co">#&gt; # ☐ band_members:     tibble [3 × 2]</span></span>
+<span><span class="co">#&gt; # ☐ band_members:     A data frame of band members</span></span>
 <span><span class="co">#&gt; # ☐ band_instruments: A data frame of band instruments</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Please `activate()`.</span></span></code></pre></div>
@@ -114,7 +118,7 @@
 <span>    <span class="va">band</span> <span class="op">==</span> <span class="st">"Beatles"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="va">band</span></span>
-<span><span class="co">#&gt; # ☒ band_members:     tibble [2 × 2]</span></span>
+<span><span class="co">#&gt; # ☒ band_members:     A data frame of band members</span></span>
 <span><span class="co">#&gt; # ☐ band_instruments: A data frame of band instruments</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
@@ -126,7 +130,7 @@
 <code class="sourceCode R"><span><span class="va">band</span> <span class="op">&lt;-</span> <span class="va">band</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/activate.html">deactivate</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">band</span></span>
-<span><span class="co">#&gt; # ☐ band_members:     tibble [2 × 2]</span></span>
+<span><span class="co">#&gt; # ☐ band_members:     A data frame of band members</span></span>
 <span><span class="co">#&gt; # ☐ band_instruments: A data frame of band instruments</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Please `activate()`.</span></span></code></pre></div>
@@ -135,7 +139,7 @@
 <code class="sourceCode R"><span><span class="va">band</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/activate.html">activate</a></span><span class="op">(</span><span class="va">band_instruments</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/rekey.html">rekey</a></span><span class="op">(</span><span class="st">"new_band_instruments"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # ☐ band_members:         tibble [2 × 2]</span></span>
+<span><span class="co">#&gt; # ☐ band_members:         A data frame of band members</span></span>
 <span><span class="co">#&gt; # ☒ new_band_instruments: A data frame of band instruments</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 2</span></span>
@@ -154,7 +158,7 @@
 <span>  <span class="fu"><a href="reference/activate.html">activate</a></span><span class="op">(</span><span class="va">key1</span>, <span class="va">band_instruments</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # ☒ key1: nav_menu [2]</span></span>
-<span><span class="co">#&gt; #   ☐ band_members:     tibble [2 × 2]</span></span>
+<span><span class="co">#&gt; #   ☐ band_members:     A data frame of band members</span></span>
 <span><span class="co">#&gt; #   ☒ band_instruments: A data frame of band instruments</span></span>
 <span><span class="co">#&gt; # ☐ key2: nav_menu [2]</span></span>
 <span><span class="co">#&gt; # </span></span>
@@ -169,7 +173,9 @@
 <h3 id="build-a-input-form">Build a input form<a class="anchor" aria-label="anchor" href="#build-a-input-form"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/new_nav_input.html">new_nav_input</a></span><span class="op">(</span>key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"key1"</span>, <span class="st">"key2"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/new_nav_input.html">new_nav_input</a></span><span class="op">(</span></span>
+<span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"key1"</span>, <span class="st">"key2"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">input</span></span>
 <span><span class="co">#&gt; # ✖ key1: chr [0]</span></span>
 <span><span class="co">#&gt; # ✖ key2: chr [0]</span></span>
