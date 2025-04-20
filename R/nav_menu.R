@@ -5,12 +5,15 @@
 #' Each line shows the menu items (keys on the left, value descriptions on the
 #' right).
 #' By default, the description from [pillar::obj_sum()] is displayed, but you
-#' can set the description using `set_nav_description()`.
+#' can set `description`.
 #' Each menu item can be accessed by [activate()].
 #'
 #' @param key A unique character vector.
 #' @param value A list of values corresponding to the keys.
-#' @param attrs A data frame for additional attributes of items (an empty data frame by default).
+#' @param description A character vector of descriptions for the keys. By
+#' default, the description from [pillar::obj_sum()] is displayed.
+#' @param attrs A data frame for additional attributes of items (an empty data
+#' frame by default).
 #' When an item becomes active, the attrs will be added to its attributes.
 #' @param ... Additional arguments passed to [vctrs::new_data_frame()].
 #' @param class A character vector of subclasses passed to [vctrs::new_data_frame()].
@@ -24,7 +27,11 @@
 #'
 #' band <- new_nav_menu(
 #'   key = c("band_members", "band_instruments"),
-#'   value = list(band_members, band_instruments)
+#'   value = list(band_members, band_instruments),
+#'   description = c(
+#'     "A data frame of band members",
+#'     "A data frame of band instruments"
+#'   )
 #' )
 #' band
 #'
@@ -39,6 +46,7 @@
 new_nav_menu <- function(
   key = character(),
   value = list(data.frame()),
+  description = NULL,
   attrs = NULL,
   ...,
   class = character()
@@ -49,7 +57,6 @@ new_nav_menu <- function(
         attr(x, "sticky_attrs") <- c(
           names(attrs),
           "navigatr_tree",
-          "navigatr_description",
           attr(x, "sticky_attrs")
         )
         attr(x, "class_grouped_df") <- c(
@@ -63,7 +70,7 @@ new_nav_menu <- function(
       } else {
         x <- stickyr::new_sticky_tibble(
           x,
-          attrs = c(names(attrs), "navigatr_tree", "navigatr_description"),
+          attrs = c(names(attrs), "navigatr_tree"),
           class_grouped_df = "navigatr_item",
           class_rowwise_df = "navigatr_item"
         )
@@ -75,6 +82,7 @@ new_nav_menu <- function(
   new_nav(
     key = key,
     value = value,
+    description = description,
     attrs = attrs,
     ...,
     class = c(class, "navigatr_nav_menu")
@@ -88,12 +96,12 @@ is_nav_menu <- function(x) {
 #' @export
 tbl_sum.navigatr_nav_menu <- function(x) {
   key <- x$key
-  out <- purrr::map_chr(key, function(key) {
-    child <- activate(x, key, .add = TRUE)
-    child <- unitem(child, remove_attrs = FALSE)
-
-    nav_description(child) %||% pillar::obj_sum(child)
-  })
+  out <- x$description %||%
+    purrr::map_chr(key, function(key) {
+      child <- activate(x, key, .add = TRUE)
+      child <- unitem(child, remove_attrs = FALSE)
+      pillar::obj_sum(child)
+    })
   names(out) <- key
   out
 }

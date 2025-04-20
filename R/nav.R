@@ -1,6 +1,7 @@
 new_nav <- function(
   key = character(),
   value = list(list()),
+  description = NULL,
   attrs = data_frame(.size = 1L),
   ...,
   class = character()
@@ -19,6 +20,7 @@ new_nav <- function(
     df_list(
       key = key,
       value = value,
+      description = description,
       attrs = attrs %||% data_frame(.size = 1L),
       .size = vec_size(key)
     ),

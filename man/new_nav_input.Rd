@@ -7,6 +7,7 @@
 new_nav_input(
   key = character(),
   value = list(character()),
+  description = NULL,
   ...,
   class = character()
 )
@@ -14,11 +15,16 @@ new_nav_input(
 \arguments{
 \item{key}{A unique character vector.}
 
-\item{value}{A list of values corresponding to the keys. By default, the values are empty characters.}
+\item{value}{A list of values corresponding to the keys. By default, the
+values are empty characters.}
+
+\item{description}{A character vector of descriptions for the keys. By
+default, the description from \code{\link[pillar:type_sum]{pillar::obj_sum()}} is displayed.}
 
 \item{...}{Additional arguments passed to \code{\link[vctrs:new_data_frame]{vctrs::new_data_frame()}}.}
 
-\item{class}{A character vector of subclasses passed to \code{\link[vctrs:new_data_frame]{vctrs::new_data_frame()}}.}
+\item{class}{A character vector of subclasses passed to
+\code{\link[vctrs:new_data_frame]{vctrs::new_data_frame()}}.}
 }
 \value{
 A \code{navigatr_nav_input} object, a subclass of class \code{data.frame}.
@@ -30,7 +36,7 @@ By default, the values are empty characters.
 Each line shows the menu items (keys on the left, value descriptions on the
 right).
 By default, the description from \code{\link[pillar:type_sum]{pillar::obj_sum()}} is displayed, but you
-can set the description using \code{set_nav_description()}.
+can set \code{description}.
 Each menu item can be changed by \code{\link[=itemise]{itemise()}}.
 }
 \seealso{

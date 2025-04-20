@@ -50,22 +50,25 @@ library(dplyr)
 
 ### Build a navigation menu
 
-To build a new navigation menu, give `new_menu()` unique keys and a list
-of their corresponding values. The upper rows show the menu items (keys
-on the left, value summaries on the right). By `set_nav_description()`,
-you can change the way the value descriptions are displayed (by default,
-the summary from `pillar::obs_sum()` is used).
+To create a new navigation menu, give `new_menu()` unique keys and a
+list of their corresponding values. The top rows show the menu items
+(keys on the left, value summaries on the right). The `description`
+argument allows you to add descriptions to the menu items (optional).
 
 ``` r
 band <- new_nav_menu(
   key = c("band_members", "band_instruments"),
   value = list(
     band_members, 
-    set_nav_description(band_instruments, "A data frame of band instruments")
+    band_instruments
+  ),
+  description = c(
+    "A data frame of band members",
+    "A data frame of band instruments"
   )
 )
 band
-#> # ☐ band_members:     tibble [3 × 2]
+#> # ☐ band_members:     A data frame of band members
 #> # ☐ band_instruments: A data frame of band instruments
 #> # 
 #> # Please `activate()`.
@@ -83,7 +86,7 @@ band <- band |>
     band == "Beatles"
   )
 band
-#> # ☒ band_members:     tibble [2 × 2]
+#> # ☒ band_members:     A data frame of band members
 #> # ☐ band_instruments: A data frame of band instruments
 #> # 
 #> # A tibble: 2 × 2
@@ -97,7 +100,7 @@ band
 band <- band |> 
   deactivate()
 band
-#> # ☐ band_members:     tibble [2 × 2]
+#> # ☐ band_members:     A data frame of band members
 #> # ☐ band_instruments: A data frame of band instruments
 #> # 
 #> # Please `activate()`.
@@ -110,7 +113,7 @@ item.
 band |> 
   activate(band_instruments) |> 
   rekey("new_band_instruments")
-#> # ☐ band_members:         tibble [2 × 2]
+#> # ☐ band_members:         A data frame of band members
 #> # ☒ new_band_instruments: A data frame of band instruments
 #> # 
 #> # A tibble: 3 × 2
@@ -133,7 +136,7 @@ bands |>
   activate(key1, band_instruments) |> 
   select(name)
 #> # ☒ key1: nav_menu [2]
-#> #   ☐ band_members:     tibble [2 × 2]
+#> #   ☐ band_members:     A data frame of band members
 #> #   ☒ band_instruments: A data frame of band instruments
 #> # ☐ key2: nav_menu [2]
 #> # 
@@ -148,7 +151,9 @@ bands |>
 ### Build a input form
 
 ``` r
-input <- new_nav_input(key = c("key1", "key2"))
+input <- new_nav_input(
+  key = c("key1", "key2")
+)
 input
 #> # ✖ key1: chr [0]
 #> # ✖ key2: chr [0]
